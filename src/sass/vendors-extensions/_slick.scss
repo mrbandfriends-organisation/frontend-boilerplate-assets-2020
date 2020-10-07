@@ -1,0 +1,148 @@
+// ==========================================================================
+//
+// SLICK
+//
+// Description: Slick overides
+//
+// ==========================================================================
+
+// ==========================================================================
+// # VARIABLES
+// ==========================================================================
+$dot-size: $half-spacing-unit - ($quarter-spacing-unit / 2);
+
+
+
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.slick-slider {
+    &.slick-dotted {
+        margin-bottom: 0;
+    }
+}
+
+
+// Disable the loading gif
+.slick-list {
+    .slick-loading & {
+        background: #fff;
+    }
+}
+
+
+.slick-track { margin: 0 auto; }
+
+
+
+
+
+// ==========================================================================
+// # ELEMENT: ARROW
+//
+// If you need to change the fill of the arrow just edit the `fill`
+// attribute. A # must be written as `%23`. A few examples are;
+//     - fill='%23fff' — White
+//     - fill='%23000' - Black
+//
+// If you want to use a new `.svg` please ensure it is optimised using
+// {https://jakearchibald.github.io/svgomg/} & URL encode the svg using
+// {http://yoksel.github.io/url-encoder/}
+// ==========================================================================
+
+.slick-arrow {
+    height: $spacing-unit;
+    transition: all ease-in-out 0.25s;
+    width: $spacing-unit;
+    z-index: $zindex-tier-1;
+
+    &:before { content: url("data:image/svg+xml,%3Csvg class='svg-arrow' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 55 55' fill='%23fff'%3E%3Cpath d='M27.5 55A27.5 27.5 0 1 1 55 27.5 27.53 27.53 0 0 1 27.5 55zm0-52A24.5 24.5 0 1 0 52 27.5 24.53 24.53 0 0 0 27.5 3z'/%3E%3Cpath d='M31.79 43.25L15.33 27.6l16.45-15.85 2.08 2.16-14.19 13.68 14.18 13.49-2.06 2.17'/%3E%3C/svg%3E%0A"); }
+
+    &.slick-disabled { pointer-events: none; }
+}
+
+.slick-prev {
+    // left: -#{$half-spacing-unit};
+    left: $half-spacing-unit;
+
+    @include mq(medium) { left: $spacing-unit; }
+
+    &:hover,
+    &:focus { transform: translate3d(rem(-5), -50%, 0); }
+}
+
+.slick-next {
+    right: -#{$half-spacing-unit};
+    // right: $half-spacing-unit;
+    transform: scaleX(-1) translate(0, -50%);
+
+    @include mq(medium) { right: $spacing-unit; }
+
+    &:hover,
+    &:focus { transform: scaleX(-1) translate3d(rem(-5), -50%, 0); }
+}
+
+
+
+
+
+// ==========================================================================
+// # ELEMENT: DOTS
+// ==========================================================================
+
+// scss-lint:disable NestingDepth
+.slick-dots {
+    bottom: 0;
+    margin-bottom: $quarter-spacing-unit;
+
+    @include mq(medium) { margin-bottom: $half-spacing-unit; }
+
+    // Nesting for specifcity
+    li {
+        border-radius: 50%;
+        height: $dot-size;
+        width: $dot-size;
+
+        @include mq(medium) {
+            margin: 0 $quarter-spacing-unit;
+        }
+
+        button {
+            height: $dot-size;
+            width: $dot-size;
+
+            &:before {
+                border: solid color-get(white) 2px;
+                border-radius: 50%;
+                color: transparent;
+                height: $dot-size;
+                opacity: 1;
+                transition: all ease-in-out 0.15s;
+                width: $dot-size;
+            }
+
+            &:hover {
+                &:before { background-color: rgba(color-get(white), 0.5); }
+            }
+        }
+
+        &.slick-active {
+            button {
+                &:before {
+                    background-color: color-get(white);
+                    color: transparent;
+                    opacity: 1;
+                }
+
+                &:hover {
+                    &:before {
+                        background-color: rgba(color-get(white), 0.5);
+                    }
+                }
+            }
+        }
+    }
+}

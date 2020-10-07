@@ -1,0 +1,160 @@
+// ==========================================================================
+//
+// TABLES
+//
+// Description: standard styles tabular data
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+table {
+    margin-bottom: $base-line-height;
+    width: 100%;
+}
+
+th,
+td {
+    padding: $spacing-unit/3;
+    text-align: left;
+}
+
+thead tr:last-child th {
+    border-bottom-width: 0;
+}
+
+// ==========================================================================
+// # CELL ALIGNMENT
+// ==========================================================================
+
+[colspan] {
+    text-align: center;
+}
+
+[colspan="1"] {
+    text-align: left;
+}
+
+[rowspan] {
+    vertical-align: middle;
+}
+
+[rowspan="1"] {
+    vertical-align: top;
+}
+
+.numerical {
+    text-align: right;
+}
+
+
+// ==========================================================================
+// # COLUMN SIZES
+//
+// In the HTML above we see several `col` elements with classes whose numbers
+// represent a percentage width for that column. We leave one column free of a
+// class so that column can soak up the effects of any accidental breakage in
+// the table.
+// ==========================================================================
+
+.t5 {
+    width: 5%;
+}
+
+.t10 {
+    width: 10%;
+}
+
+.t12 {
+    width: 12.5%;
+}
+
+.t15 {
+    width: 15%;
+}
+
+.t20 {
+    width: 20%;
+}
+
+.t25 {
+    width: 25%;
+}
+
+.t30 {
+    width: 30%;
+}
+
+.t33 {
+    width: 33.333%;
+}
+
+.t35 {
+    width: 35%;
+}
+
+.t37 {
+    width: 37.5%;
+}
+
+.t40 {
+    width: 40%;
+}
+
+.t45 {
+    width: 45%;
+}
+
+.t50 {
+    width: 50%;
+}
+
+.t55 {
+    width: 55%;
+}
+
+.t60 {
+    width: 60%;
+}
+
+.t62 {
+    width: 62.5%;
+}
+
+.t65 {
+    width: 65%;
+}
+
+.t66 {
+    width: 66.666%;
+}
+
+.t70 {
+    width: 70%;
+}
+
+.t75 {
+    width: 75%;
+}
+
+.t80 {
+    width: 80%;
+}
+
+.t85 {
+    width: 85%;
+}
+
+.t87 {
+    width: 87.5%;
+}
+
+.t90 {
+    width: 90%;
+}
+
+.t95 {
+    width: 95%;
+}

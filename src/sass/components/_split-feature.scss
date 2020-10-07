@@ -1,0 +1,95 @@
+// ==========================================================================
+//
+// SPLIT FEATURE
+//
+// Description: Componet with even columns. Has multiple partial layouts;
+//              - Default (Title, number title, copy & CTA)
+//              - Quote   (Quote, quote author & background-image)
+//
+//
+// ==========================================================================
+
+// ==========================================================================
+// # MIXIN
+// ==========================================================================
+
+@mixin split-feature-color($color: false, $color-shade: default) {
+    @if($color != false) {
+        $color-shade-modifier: "";
+
+        @if( $color-shade != default ) {
+            $color-shade-modifier: $color-shade + "-";
+        }
+
+        .split-feature--#{$color-shade-modifier}#{$color} {
+
+            &:before { background-color: color-get($color, $color-shade); }
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+// .split-feature-container {}
+
+
+.split-feature__column {
+    .flexbox & { @include flex-col(strech, center);  }
+}
+
+
+.split-feature {
+    @include base-background();
+    height: 100%;
+    position: relative;
+
+    &:before {
+        background-color: inherit;
+        content: "";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    .flexbox & { @include flex-col(center, center); }
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: COLORS
+//
+// The loop is commented out by default as we offten do not need all the
+// color variations for a build. If you do need them but don't need all the
+// `light` or `dark` shades just leave the relavent shade commented out.
+//
+// The example below just manually calls a few color modifers to save
+// creating a lot of unessacery classes.
+// ==========================================================================
+
+@include split-feature-color(primary);
+@include split-feature-color(off-white);
+
+
+// @each $color, $default-shade in $brand-colors {
+//     @include split-feature-color($color);
+//
+//     @if( map-has-nested-keys($brand-colors, $color, light) == true) {
+//         @include split-feature-color($color, light);
+//     }
+//
+//     @if( map-has-nested-keys($brand-colors, $color, dark) == true) {
+//         @include split-feature-color($color, dark);
+//     }
+// }

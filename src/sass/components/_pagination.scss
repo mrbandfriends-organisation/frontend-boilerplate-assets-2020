@@ -1,0 +1,49 @@
+// ==========================================================================
+//
+// PAGINATION
+//
+// Description: Pagination styles
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.pagination-container { background-color: #fff; }
+
+.pagination {
+    @include list-reset;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pagination__item {
+    &:not(:last-of-type) { margin-right: rem(20); }
+}
+
+// .pagination__item--number {}
+
+// .pagination__item--prev {}
+
+// .pagination__item--next {}
+
+.pagination__arrow {
+    height: rem(20);
+
+    &--prev {
+        svg {
+            transform: rotate(180deg);
+            transform-origin: center;
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: %%MODIFIER_NAME%%
+// ==========================================================================

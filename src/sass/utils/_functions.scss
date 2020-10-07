@@ -1,0 +1,188 @@
+// ==========================================================================
+// FUNCTIONS
+//
+// Description: global application wide functions
+//
+// ==========================================================================
+
+// scss-lint:disable ElsePlacement
+
+
+@function strip-units($value) {
+    @return ($value / ($value * 0 + 1));
+}
+
+// ==========================================================================
+// # FLIP
+// # flips a value depending on value of $direction. Useful for managing
+// # multi lingual sites
+// # http://bit.ly/1LRLRgZ
+// ==========================================================================
+
+@function flip($value-ltr, $value-rtl) {
+    @if $direction == right {
+        @return $value-rtl;
+    } @else {
+        @return $value-ltr;
+    }
+}
+
+
+// ==========================================================================
+// UTILITIES
+// ==========================================================================
+
+// PARSEINT
+// parses an integer from an input
+// ==========================================================================
+@function parse-int($n) {
+    @return $n / ($n * 0 + 1);
+}
+
+
+
+
+
+// GCF
+// Find the greatest common factor of two integers
+// borrowed from https://raw.github.com/necolas/griddle/master/_griddle-build.scss
+// ==========================================================================
+@function gcf($a, $b) {
+    @if $b == 0 {
+        @return $a;
+    } @else {
+        @return gcf($b, $a % $b);
+    }
+}
+
+
+
+
+
+// CONTAINS
+// Check if a list contains a given value
+// borrowed from https://raw.github.com/necolas/griddle/master/_griddle-build.scss
+// ==========================================================================
+@function contains($list, $value) {
+    @if length($list) != 1 { @return index($list, $value); }
+    @else { @return $list == $value; }
+}
+
+
+
+
+
+// MAP DEEP GET
+// ==========================================================================
+/// Map deep get
+/// @author Hugo Giraudel
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
+
+
+
+
+// MAP DEPTH
+// ==========================================================================
+/// Compute the maximum depth of a map
+/// @param {Map} $map
+/// @return {Number} max depth of `$map`
+@function map-depth($map) {
+    $level: 1;
+    @each $key, $value in $map {
+        @if type-of($value) == "map" {
+            $level: max(map-depth($value) + 1, $level);
+        }
+    }
+    @return $level;
+}
+
+
+
+
+
+//    MAP HAS KEYS
+// ==========================================================================
+/// Test if map got all `$keys` at first level
+/// @author Hugo Giraudel
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Keys to test
+/// @return {Bool}
+@function map-has-keys($map, $keys...) {
+    @each $key in $keys {
+        @if not map-has-key($map, $key) {
+            @return false;
+        }
+    }
+    @return true;
+}
+
+
+
+
+
+//    MAP HAS NESTED KEYS
+// ==========================================================================
+/// Test if map got all `$keys` nested with each others
+/// @author Hugo Giraudel
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Keys to test
+/// @return {Bool}
+@function map-has-nested-keys($map, $keys...) {
+    @each $key in $keys {
+        @if not map-has-key($map, $key) {
+            @return false;
+        }
+        $map: map-get($map, $key);
+    }
+    @return true;
+}
+
+
+
+
+
+// COLOR GET
+// ==========================================================================
+/// Color get
+/// @author Northern Badger
+/// @param {String} $key - Key for nested map
+/// @param {Arglist} $type - Key for color keys inside nested map.
+/// @return {string} - Desired HEX code
+@function color-get($key, $type: default) {
+    @return map-deep-get($brand-colors, $key, $type);
+}
+
+
+
+
+
+
+// REM
+// ==========================================================================
+// Borrow from Bourbon (which as deprecating it!)
+// Convert pixels to rems
+// eg. for a relational value of 12px write rem(12)
+// Assumes $em-base is the font-size of <html>
+
+@function rem($pxval) {
+    @if not unitless($pxval) {
+          $pxval: strip-units($pxval);
+    }
+
+    $base: $em-base;
+    @if not unitless($base) {
+        $base: strip-units($base);
+    }
+
+    @return ($pxval / $base) * 1rem;
+}

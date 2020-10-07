@@ -1,0 +1,62 @@
+// ==========================================================================
+//
+// OFFCANVAS TOGGLE
+//
+// Description: Styles for offcanvas toggle/trigger
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+
+.offcanvas-toggle {
+    // scss-lint:disable ImportantRule
+    @include mq($from: nav-break-2) {
+        // important required to ensure that any site specific styling
+        // applied to the toggle does not overide the visibility
+        display: none !important;
+    }
+
+    .no-js & {
+        display: none;
+    }
+
+
+    &:hover,
+    &:focus {
+        span {
+            color: color-get(grey, dark);
+        }
+    }
+}
+
+.offcanvas-toggle__text {
+    color: #000;
+    padding-right: $quarter-spacing-unit;
+}
+
+.offcanvas-toggle--open {
+    float: flip(right, left);
+    text-decoration: none;
+}
+
+.offcanvas-toggle--close {
+    position: relative;
+    z-index: 2;
+
+    &.offcanvas-toggle--close {
+        float: right;
+        height: 45px;
+        padding: 0;
+        text-align: flip(right, left);
+    }
+
+    .tcon-menu__lines {
+        &:before,
+        &:after {
+            background: #fff;
+        }
+    }
+}

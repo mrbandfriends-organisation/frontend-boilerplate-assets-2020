@@ -1,0 +1,105 @@
+// ==========================================================================
+//
+// ARROWS
+//
+// Description: Arrow used on various UI components
+//
+// ==========================================================================
+
+// ==========================================================================
+// MIXIN
+// ==========================================================================
+
+// To load different coloured icons
+@mixin arrow-color($color: null) {
+    @if($color != null) {
+        content: url("../svg/standalone/arrow-circle--#{$color}.svg");
+    } @else {
+        content: url("../svg/standalone/arrow-circle.svg");
+    }
+}
+
+
+// Main mixin for the arrow
+@mixin arrow($direction: prev, $color: null) {
+
+    @if($direction == next) {
+        transform: scaleX(-1) translate3d(0, -50%, 0);
+
+        &:hover {
+            transform: scaleX(-1) translate3d(rem(-5), -50%, 0);
+
+            &:before {opacity: 0.75;}
+        }
+    } @else {
+        transform: translate3d(0, -50%, 0);
+
+        &:hover {
+            transform: translate3d(rem(-5), -50%, 0);
+
+            &:before {opacity: 0.75;}
+        }
+    }
+
+    height: rem(30);
+    transition: transform ease-in-out 0.35s;
+    width: rem(30);
+
+    @include mq($from: 420px) {
+        height: rem(35);
+        width: rem(35);
+    }
+
+    @include mq(small) {
+        height: rem(40);
+        width: rem(40);
+    }
+
+    @include mq(medium) {
+        height: rem(50);
+        width: rem(50);
+    }
+
+    &:before {
+        @include arrow-color($color);
+        transition: opacity ease-in-out 0.35s;
+    }
+
+    &:focus {
+        outline: 0;
+
+        &:before {
+            opacity: 0.75;
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+.arrow {
+    @include arrow();
+}
+
+.arrow--next {
+    @include arrow(next);
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: COLOR ARROW
+// ==========================================================================
+
+.arrow--tertiary {
+    &:before {
+        @include arrow-color(tertiary);
+    }
+}

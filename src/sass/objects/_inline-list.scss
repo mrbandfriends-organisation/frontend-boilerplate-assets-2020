@@ -1,0 +1,178 @@
+// ==========================================================================
+// INLINE LIST
+//
+// Description: create horizontally laid-out lists with
+// optional spacing and dividers
+// ==========================================================================
+
+
+// ==========================================================================
+// # MIXINS
+// ==========================================================================
+
+@mixin inline-list() {
+    @include list-reset;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    &.no-flexbox {
+        @include clearfix;
+        margin: 0 0 $spacing-unit (-$spacing-unit);
+        zoom: 1;
+    }
+
+    .inline-list__item,
+    > li {
+        display: flex;
+
+        &.no-flexbox {
+            display: block;
+            float: left;
+            list-style: none;
+            margin-left: $spacing-unit;
+        }
+    }
+}
+
+
+@mixin inline-list--ib($spacing: $half-spacing-unit) {
+    flex-direction: row;
+
+    .inline-list__item,
+    > li {
+        &:not(:last-of-type) { margin-right: $spacing; }
+
+        .no-flexbox & {
+            @include inline-block;
+            float: none;
+            letter-spacing: normal;
+            vertical-align: middle;
+        }
+    }
+}
+
+@mixin inline-list--divided($seperation: $half-spacing-unit) {
+    .inline-list__item,
+    > li {
+        @include mq(medium) {
+            &:not(:first-of-type) {
+                margin-left: ($seperation/2);
+            }
+
+            &:not(:last-of-type) {
+                &:after {
+                    @include inline-block;
+                    content: "|";
+                    margin-left: $seperation;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.inline-list { @include inline-list; }
+
+// ==========================================================================
+// # MODIFIER: DIVIDED
+// ==========================================================================
+
+.inline-list--divided {
+    @include inline-list--divided;
+}
+
+
+// ==========================================================================
+// # MODIFIER: CENTERED
+// ==========================================================================
+
+.inline-list--centered {
+    letter-spacing: -4px;
+    margin-left: 0;
+    text-align: center;
+
+    > li,
+    .inline-list__item,
+    .inline-list__item--centered {
+        @include inline-block;
+        float: none;
+        letter-spacing: normal;
+        margin-left: $half-spacing-unit;
+        margin-right: $half-spacing-unit;
+    }
+}
+
+// ==========================================================================
+// # MODIFIER: INLINE BLOCK
+// ==========================================================================
+
+.inline-list--ib {
+    flex-direction: row;
+
+    .inline-list__item,
+    > li {
+        &:not(:last-of-type) { margin-right: $half-spacing-unit; }
+
+        &.no-flexbox {
+            @include inline-block;
+            float: none;
+            letter-spacing: normal;
+            vertical-align: middle;
+        }
+    }
+}
+
+
+.inline-list--ib-reverse {
+    justify-content: flex-end;
+}
+
+
+.inline-list--ib-medium {
+    @include mq(medium) {
+        flex-direction: row;
+
+        .inline-list__item,
+        > li {
+            &:not(:last-of-type) { margin-right: $half-spacing-unit; }
+
+            &.no-flexbox {
+                @include inline-block;
+                float: none;
+                letter-spacing: normal;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: ICON LIST
+// ==========================================================================
+
+.inline-list--icon {
+    .inline-list__icon {
+        display: inline-block;
+        margin-right: rem(5);
+
+        &--icon {
+            color: color-get(primary);
+            fill: color-get(primary);
+        }
+    }
+
+    .inline-list__content { display: inline-block; }
+}

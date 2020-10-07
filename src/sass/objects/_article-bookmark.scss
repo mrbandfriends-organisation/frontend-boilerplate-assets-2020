@@ -1,0 +1,68 @@
+// ==========================================================================
+//
+// ARTICLE BOOKMARK
+//
+// Description: A coloured small tab with short piece
+//              of copy in.
+//
+// ==========================================================================
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+@mixin article-bookmark() {
+    @include wf-secondary;
+    background-color: color-get(primary);
+    color: #fff;
+    font-size: $base-font-size;
+    left: 0;
+    padding: rem(9) rem(18);
+    position: absolute;
+    top: 0;
+}
+
+
+
+
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+.article-bookmark { @include article-bookmark; }
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: COLOURS
+// ==========================================================================
+
+// @mixin article-bookmark-color($color: null, $color-shade: default) {
+//     @if($color) {
+//         $color-shade-modifier: "";
+//
+//         @if( $color-shade != default ) {
+//             $color-shade-modifier: $color-shade + "-";
+//         }
+//
+//         .article-bookmark--#{$color-shade-modifier}#{$color} {
+//             background-color: color-get($color, $type);
+//         }
+//     }
+// }
+//
+//
+// @each $color, $default-shade in $brand-colors {
+//     @include article-bookmark-color($color);
+//
+//     @if( map-has-nested-keys($brand-colors, $color, light) == true) {
+//         @include article-bookmark-color($color, light);
+//     }
+//
+//     @if( map-has-nested-keys($brand-colors, $color, dark) == true) {
+//         @include article-bookmark-color($color, dark);
+//     }
+// }

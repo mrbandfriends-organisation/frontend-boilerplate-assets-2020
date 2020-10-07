@@ -1,0 +1,81 @@
+// ==========================================================================
+//
+// BACKGROUND VIDEO
+//
+// Description:
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.background-video {
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+
+    video {
+        height: 100%;
+        left: 50%;
+        object-fit: cover;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+    }
+}
+
+// # POSTER
+// ==========================================================================
+.background-video__poster {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    opacity: 1;
+    position: absolute;
+    transition: opacity 0.25s;
+    width: 100%;
+    z-index: $zindex-tier-1;
+}
+
+// scss-lint:disable MergeableSelector
+.background-video.is-playing .background-video__poster {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+// # CONTROLS
+// ==========================================================================
+
+.background-video__controls {
+    bottom: 2em;
+    left: 2em;
+    position: absolute;
+    z-index: $zindex-tier-2;
+}
+
+.background-video__control {
+    margin-right: 1em;
+
+    &:after { content: ""; }
+}
+
+
+// ==========================================================================
+// # MODIFIER: CONTAINED
+// ==========================================================================
+
+.background-video--contained {
+    bottom: auto;
+    left: auto;
+    position: relative;
+    right: auto;
+    top: auto;
+}

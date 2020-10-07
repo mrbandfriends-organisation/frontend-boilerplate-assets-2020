@@ -1,0 +1,105 @@
+// ============================================================
+
+// MODULE: BAND
+
+// Description: full width section with style variations.
+// Typically used to isolate and define sections of a long
+// content driven page
+
+// ============================================================
+
+// ============================================================
+//   MIXIN
+// ============================================================
+
+@mixin band-color($color: false, $color-shade: default) {
+    @if($color != false) {
+        $color-shade-modifier: "";
+
+        @if( $color-shade != default ) {
+            $color-shade-modifier: $color-shade + "-";
+        }
+
+        .band--#{$color-shade-modifier}#{$color} {
+            background-color: color-get($color, $color-shade);
+        }
+    }
+}
+
+
+
+
+
+// ============================================================
+//   BASE
+// ============================================================
+
+// This loops over our spacing map. The $spacing-map is made up of
+// our spacing-units. The idea here is to keep our band class inline
+// with our other variable names used throughout the site.
+@each $name, $size in $spacing-map {
+    $modifier: "";
+
+    @if($name != "default") {
+        $modifier: "--#{$name}";
+    }
+
+    .band#{$modifier} {
+        @include clearfix;
+        padding-bottom: $size / 2;
+        padding-top: $size / 2;
+
+        @include mq(medium) {
+            padding-bottom: $size / 1.5;
+            padding-top: $size / 1.5;
+        }
+
+        @include mq(large) {
+            padding-bottom: $size;
+            padding-top: $size;
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: NO PADDING
+// ==========================================================================
+
+.band--no-padding {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.band--no-top {
+    padding-top: 0;
+}
+
+.band--no-bottom {
+    padding-bottom: 0;
+}
+
+
+
+
+
+//   #MODIFERS: BAND COLOR
+// ==========================================================================
+
+// Don't use this by default. Totally fine to use if needed on the project
+
+
+// @each $color, $default-shade in $brand-colors {
+//     @include band-color($color);
+//
+//     @if( map-has-nested-keys($brand-colors, $color, light) == true) {
+//         @include band-color($color, light);
+//     }
+//
+//     @if( map-has-nested-keys($brand-colors, $color, dark) == true) {
+//         @include band-color($color, dark);
+//     }
+// }

@@ -1,0 +1,177 @@
+// ============================================================
+
+// OFFCANVAS NAV
+
+// Description:
+//
+// scoped styles for JS powered offcanvas nav. Styles are heavily
+// scoped via MQs to avoid effecting larger screens (avoids
+// unwanted specificity issues). Offcanvas functionality requires
+// JS module to initialise classnames based on DOM events
+
+// ============================================================
+
+@mixin ui-offcanvas(
+                        $el-body: ".offcanvas__body",
+                        $el-off-right: ".offcanvas__offscreen--right",
+                        $el-off-left: ".offcanvas__offscreen--left",
+                        $el-off-top: ".offcanvas__offscreen--top",
+                        $off-width: 260px,
+                        $positioning: "absolute"
+                    ) {
+
+    // ==========================================================================
+    // BASE
+    // required for positioning context and clipping in various browsers
+    // ==========================================================================
+
+    // rules for the selector on which the mixin was called
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+
+    // Remove transition flicker on phones
+    backface-visibility: hidden;
+
+
+    // ==========================================================================
+    // BODY
+    // element that contains the primary "on screen" content
+    // ==========================================================================
+
+    #{$el-body} {
+        backface-visibility: hidden;
+        background-color: #fff; // required to ensure offscreen if competely covered by "body" element
+        min-height: 900px; // otherwise the offcanvas shows through...
+        overflow-x: hidden; // clip the overflow on older browsers as Android seems to have issues with overflow-x
+        position: relative;
+        width: 100%;
+        z-index: 2;
+
+        // Remove transition flicker on phones
+
+        .csstransforms3d & {
+            overflow-x: visible; // reinstate visibility of overflow on more capable browsers
+            transform: translate3d(0, 0, 0); // make sure render layer is precomposed
+            transition: transform 0.3s ease;
+        }
+    }
+
+
+    // ==========================================================================
+    // OFFSCREEN
+    // the element that is hidden "off screen"
+    // ==========================================================================
+
+    #{$el-off-left},
+    #{$el-off-right},
+    #{$el-off-top} {
+        color: #fff;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding: 0 5%;
+        position: fixed;
+        transform: translate3d(0, 0, 0);
+        transition: all ease 0.25s;
+        width: 100%;
+        z-index: $zindex-tier-9;
+
+        // On small screens sometimes the set pixel width is too wide
+        // so we only kick this in at larger breakpoints
+
+        @include mq(nav-break-2) {
+            width: $off-width;
+        }
+    }
+
+
+    // (Offscreen) LEFT
+    // ==========================================================================
+    #{$el-off-left} {
+        #{$right}: auto;
+        #{$left}: -100%;
+        #{$top}: 0%;
+    }
+
+    // (Offscreen) RIGHT
+    // =========================================================================
+    #{$el-off-right} {
+        #{$right}: -100%;
+        #{$left}: auto;
+        #{$top}: 0%;
+    }
+
+    // (Offscreen) TOP
+    // =========================================================================
+    #{$el-off-top} {
+        #{$right}: 0%;
+        #{$top}: -100%;
+        #{$left}: auto;
+    }
+
+    // ==========================================================================
+    // STATE: ACTIVE
+    // move the "body" element left/right to reveal "off" element
+    // ==========================================================================
+    @include mq($until: nav-break-2) {
+        &.is-active-right,
+        &.is-active-left {
+            #{$el-body} {
+                min-height: 2000px; // fix to ensure offcanvas can never show up due to body not being tall enough
+                overflow: hidden;
+
+                &:after {
+                    height: 100%;
+                    opacity: 1;
+                    transition: opacity 0.1s;
+                    width: 100%;
+                }
+            }
+
+            #{$el-off-left},
+            #{$el-off-right} {
+                transition: opacity 0.05s linear;
+            }
+
+        }
+
+        // ACTIVE RIGHT
+        // ==========================================================================
+
+        // &.is-active-right {
+        //     #{$el-body} {
+        //         #{$right}: $off-width;
+
+        //         .csstransforms3d & {
+        //             #{$right}: auto;
+        //             transform: translate3d(flip(-$off-width, $off-width), 0, 0);
+        //         }
+        //     }
+
+        //     #{$el-off-right} {
+        //         opacity: 1; // restore visbility
+        //     }
+        // }
+
+
+        // ACTIVE LEFT
+        // ==========================================================================
+
+        // &.is-active-left {
+        //     #{$el-body} {
+        //         #{$left}: $off-width;
+
+        //         .csstransforms3d & {
+        //             #{$left}: auto;
+        //             transform: translate3d(flip($off-width, -$off-width), 0, 0);
+        //         }
+        //     }
+
+        //     #{$el-off-left} {
+        //         opacity: 1; // restore visbility
+        //     }
+        // }
+    }
+
+}//end mixin

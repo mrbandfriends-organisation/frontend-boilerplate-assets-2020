@@ -1,0 +1,70 @@
+// ==========================================================================
+//
+// CAROUSEL
+//
+// Description: Carousel styles
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.carousel-container {
+    height: 50vh;
+    // @include section-fh-image;
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: FULL HEIGHT
+// ==========================================================================
+
+.slick-slider.carousel--full-height {
+    @include flex-col(stretch, center);
+    height: 100%; // force to fill aspect ratio'd container (also fixes IE11 bugs)
+
+    .slick-list {
+        @include flex-col(stretch, center);
+    }
+
+    .slick-track {
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .carousel__slide {
+        @include base-background(50%);
+        @include flex-col(stretch, center);
+        height: auto;
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # ELEMENT: NO JS
+// ==========================================================================
+
+
+.carousel {
+    .no-js & {
+        .slick-dots,
+        .slick-arrow { display: none; }
+
+        .carousel__slide:not(:first-of-type) { display: none; }
+    }
+
+}
+
+
+.carousel--full-height {
+    .no-js & {
+        .carousel__slide:first-of-type { height: 100vh; }
+    }
+}

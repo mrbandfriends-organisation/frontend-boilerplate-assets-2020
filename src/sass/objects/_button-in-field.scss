@@ -1,0 +1,145 @@
+// ==========================================================================
+//
+// EMAIL SIGNUP FORM
+//
+// Description: for signing up to emails
+//
+// ==========================================================================
+
+// ==========================================================================
+// MIXINS
+// ==========================================================================
+
+@mixin button-in-field-button($width, $left) {
+    background-color: color-get(pink);
+    border-radius: 0;
+    color: color-get(white);
+    height: calc(100% - 2px);
+    left: $left;
+    line-height: 1;
+    overflow: visible;
+    padding: $quarter-spacing-unit;
+    position: absolute;
+    top: 1px;
+    width: $width;
+
+    &::after {
+        @include transition(0.1s);
+        @include base-background();
+
+        content: "";
+        height: 60%;
+        left: 53%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+    }
+}
+
+@mixin search-hover-state() {
+    &:hover,
+    &:focus {
+        &::after {
+            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3My4wMTkgNzEuMzciPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik01Ni4wOCA0NC41MzFhMjkuOTY5IDI5Ljk2OSAwIDEgMC05LjUgMTAuM0w2My4xMTkgNzEuMzdsOS45LTkuOXptLTI2LjEzNyAxLjM1NmExNS45NDQgMTUuOTQ0IDAgMSAxIDE1Ljk0NC0xNS45NDMgMTUuOTYyIDE1Ljk2MiAwIDAgMS0xNS45NDQgMTUuOTQzeiIvPjwvc3ZnPg=="),
+                url("/app/themes/hoare-lea-website-2017/assets/images/search.png");
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+.button-in-field {
+    font-size: 16px;
+    position: relative;
+
+    .button-in-field__button {
+        //@include button-in-field-button(calc(1em + #{$half-spacing-unit}), calc(100% - 45px));
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// MODIFIERS
+// ==========================================================================
+
+.button-in-field__button--chevron {
+    &::after {
+        background-image: url("data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MDcuNDM2IDQwNy40MzYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQwNy40MzYgNDA3LjQzNjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiPgo8cG9seWdvbiBwb2ludHM9IjExMi44MTQsMCA5MS41NjYsMjEuMTc4IDI3My41MTIsMjAzLjcxOCA5MS41NjYsMzg2LjI1OCAxMTIuODE0LDQwNy40MzYgMzE1Ljg2OSwyMDMuNzE4ICIgZmlsbD0iI0ZGRkZGRiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"),
+            url("/app/themes/hoare-lea-website-2017/assets/images/right-chevron.png");
+    }
+
+    &:hover {
+        &::after {
+            transform: translate(-40%, -50%);
+        }
+    }
+}
+
+.button-in-field__button--search {
+    &::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3My4wMTkgNzEuMzciPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik01Ni4wOCA0NC41MzFhMjkuOTY5IDI5Ljk2OSAwIDEgMC05LjUgMTAuM0w2My4xMTkgNzEuMzdsOS45LTkuOXptLTI2LjEzNyAxLjM1NmExNS45NDQgMTUuOTQ0IDAgMSAxIDE1Ljk0NC0xNS45NDMgMTUuOTYyIDE1Ljk2MiAwIDAgMS0xNS45NDQgMTUuOTQzeiIvPjwvc3ZnPg=="),
+            url("/app/themes/hoare-lea-website-2017/assets/images/search.png");
+    }
+}
+
+
+
+
+
+// SEARCH ICON SVG COLOUR MODIFIERS
+// ==========================================================================
+
+.button-in-field__button--searchyellow {
+    &::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3My4wMTkgNzEuMzciPjxwYXRoIGZpbGw9IiNlM2VkNjQiIGQ9Ik01Ni4wOCA0NC41MzFhMjkuOTY5IDI5Ljk2OSAwIDEgMC05LjUgMTAuM0w2My4xMTkgNzEuMzdsOS45LTkuOXptLTI2LjEzNyAxLjM1NmExNS45NDQgMTUuOTQ0IDAgMSAxIDE1Ljk0NC0xNS45NDMgMTUuOTYyIDE1Ljk2MiAwIDAgMS0xNS45NDQgMTUuOTQzeiIvPjwvc3ZnPg=="),
+            url("/app/themes/hoare-lea-website-2017/assets/images/search-yellow.png");
+    }
+
+    @include search-hover-state();
+}
+
+.button-in-field__button--searchpurple {
+    &::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3My4wMTkgNzEuMzciPjxwYXRoIGZpbGw9IiM5YjhkYzYiIGQ9Ik01Ni4wOCA0NC41MzFhMjkuOTY5IDI5Ljk2OSAwIDEgMC05LjUgMTAuM0w2My4xMTkgNzEuMzdsOS45LTkuOXptLTI2LjEzNyAxLjM1NmExNS45NDQgMTUuOTQ0IDAgMSAxIDE1Ljk0NC0xNS45NDMgMTUuOTYyIDE1Ljk2MiAwIDAgMS0xNS45NDQgMTUuOTQzeiIvPjwvc3ZnPg=="),
+            url("/app/themes/hoare-lea-website-2017/assets/images/search-purple.png");
+    }
+
+    @include search-hover-state();
+}
+
+.button-in-field__button--searchpink {
+    &::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3My4wMTkgNzEuMzciPjxwYXRoIGZpbGw9IiNkMDJlNmYiIGQ9Ik01Ni4wOCA0NC41MzFhMjkuOTY5IDI5Ljk2OSAwIDEgMC05LjUgMTAuM0w2My4xMTkgNzEuMzdsOS45LTkuOXptLTI2LjEzNyAxLjM1NmExNS45NDQgMTUuOTQ0IDAgMSAxIDE1Ljk0NC0xNS45NDMgMTUuOTYyIDE1Ljk2MiAwIDAgMS0xNS45NDQgMTUuOTQzeiIvPjwvc3ZnPg=="),
+            url("/app/themes/hoare-lea-website-2017/assets/images/search-pink.png");
+    }
+
+    @include search-hover-state();
+}
+
+.button-in-field__button--searchgreen {
+    &::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3My4wMTkgNzEuMzciPjxwYXRoIGZpbGw9IiNiNWQxYzAiIGQ9Ik01Ni4wOCA0NC41MzFhMjkuOTY5IDI5Ljk2OSAwIDEgMC05LjUgMTAuM0w2My4xMTkgNzEuMzdsOS45LTkuOXptLTI2LjEzNyAxLjM1NmExNS45NDQgMTUuOTQ0IDAgMSAxIDE1Ljk0NC0xNS45NDMgMTUuOTYyIDE1Ljk2MiAwIDAgMS0xNS45NDQgMTUuOTQzeiIvPjwvc3ZnPg=="),
+            url("/app/themes/hoare-lea-website-2017/assets/images/search-green.png");
+    }
+
+    @include search-hover-state();
+}
+
+.button-in-field__button--searchblue {
+    &::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3My4wMTkgNzEuMzciPjxwYXRoIGZpbGw9IiM3YWFhYmUiIGQ9Ik01Ni4wOCA0NC41MzFhMjkuOTY5IDI5Ljk2OSAwIDEgMC05LjUgMTAuM0w2My4xMTkgNzEuMzdsOS45LTkuOXptLTI2LjEzNyAxLjM1NmExNS45NDQgMTUuOTQ0IDAgMSAxIDE1Ljk0NC0xNS45NDMgMTUuOTYyIDE1Ljk2MiAwIDAgMS0xNS45NDQgMTUuOTQzeiIvPjwvc3ZnPg=="),
+            url("/app/themes/hoare-lea-website-2017/assets/images/search-blue.png");
+    }
+
+    @include search-hover-state();
+}

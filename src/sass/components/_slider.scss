@@ -1,0 +1,63 @@
+// ==========================================================================
+//
+// SLIDER
+//
+// Description: Slider styles
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: FULL HEIGHT
+// ==========================================================================
+
+.slick-slider.slider--full-height {
+    @include flex-col(stretch, center);
+
+    .slick-list {
+        @include flex-col(stretch, center);
+    }
+
+    .slick-track {
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .slider__slide {
+        @include flex-col(stretch, center);
+        height: auto;
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # ELEMENT: NO JS
+// ==========================================================================
+
+
+.slider {
+    .no-js & {
+        .slick-dots,
+        .slick-arrow { display: none; }
+
+        .slider__slide:not(:first-of-type) { display: none; }
+    }
+
+}
+
+
+.slider--full-height {
+    .no-js & {
+        .slider__slide:first-of-type { height: 100vh; }
+    }
+}

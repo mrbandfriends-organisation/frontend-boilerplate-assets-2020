@@ -1,0 +1,90 @@
+// ==========================================================================
+//
+// MAP
+//
+// Description: describe your component here
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.map-container { height: 100%; }
+
+.google-map {
+    height: 400px;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+
+    &.is-inview {
+        opacity: 1;
+    }
+}
+
+
+.map-info-window {
+    width: 150px; // Adding Pixel value here to set width of info window popup
+}
+
+.map-info-window__link {
+    color: blue;
+    font-size: 14px;
+
+    &:hover,
+    &:focus {
+        color: blue;
+    }
+}
+
+
+// MARKER REFERENCES
+// ==========================================================================
+
+
+.google-map__marker-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.google-map__marker {
+    @include wf-secondary;
+    color: color-get(primary, dark);
+    display: inline-grid;
+    font-size: 14px;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0 0 $half-spacing-unit;
+    width: 100%;
+
+    svg {
+        height: $spacing-unit;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @include mq(large) {
+        padding: $half-spacing-unit 0 $half-spacing-unit;
+        font-size: $base-font-size;
+
+        svg {
+            height: $spacing-unit;
+            margin: 0 auto;
+            margin-bottom: $quarter-spacing-unit;
+        }
+    }
+}
+
+
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: %%MODIFIER_NAME%%
+// ==========================================================================
+

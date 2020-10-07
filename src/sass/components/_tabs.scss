@@ -1,0 +1,115 @@
+// ==========================================================================
+//
+// TABS
+//
+// Description: Base styles for tabs module
+//
+// ==========================================================================
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+
+.tabs {
+    position: relative;
+}
+
+
+.tabs-container__panel {
+    clear: right;
+
+    .js & {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s linear;
+    }
+
+    &[aria-hidden="false"] {
+        opacity: 1;
+    }
+}
+
+.tab--active {
+    .js & {
+        display: block;
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # NAVIGATION
+// ==========================================================================
+
+
+.tabs__navigation-wrap {
+    @include mq($until: medium) {
+        width: 100%;
+
+        &:after {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            bottom: 0;
+            content: "";
+            display: block;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: $spacing-unit + $half-spacing-unit;
+        }
+    }
+}
+
+
+.tabs__navigation {
+    display: inline-block;
+    list-style: none;
+
+    @include mq($until: medium) {
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+
+}
+
+
+.tabs__navigation__item {
+    border-bottom: 1px solid color-get(grey);
+    display: inline-block;
+    padding: $quarter-spacing-unit;
+    position: relative;
+
+    @include mq($until: medium) {
+        text-align: center;
+
+        &:last-child {
+            margin-right: 50%; // allow space for rightmost tab to scroll into view
+        }
+    }
+
+    @include mq(small) { padding: $half-spacing-unit; }
+}
+
+
+.tabs__navigation__button {
+    color: color-get(grey);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+.tabs__navigation__item--active {
+    border-bottom: 3px solid color-get(primary);
+
+    .tabs__navigation__button { color: color-get(primary); }
+
+    &:after {
+        bottom: -3px;
+        left: 0;
+        position: absolute;
+    }
+}

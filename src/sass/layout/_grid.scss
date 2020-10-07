@@ -1,0 +1,318 @@
+// ==========================================================================
+// GRID
+//
+// Fluid, mobile-first grid framework based on Griddle by @necolas
+// ==========================================================================
+
+
+// ==========================================================================
+// GRID WRAP
+// unit which wraps a grid "row"
+// ==========================================================================
+
+@mixin gw() {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+    margin-left: -#{$gutter};
+    padding:     0;
+    list-style:  none;
+    text-rendering: optimizespeed;
+}
+
+.grid,
+.grid-wrap {
+    @include gw();
+}
+
+
+
+
+// ==========================================================================
+// GRID COLUMN/UNIT
+// ==========================================================================
+
+@mixin gc() {
+    // scss-lint:disable PropertySpelling
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+    #{$padding-left}: $gutter;
+    text-rendering: auto; // Reset text defaults.
+}
+
+.gc {
+    @include gc();
+}
+
+@if ($use-standard-breakpoints == true) {
+    // Tiny
+    @include mq($from: tiny) {
+        @include griddle-build($grids, "t");
+    }
+
+    // Small
+    @include mq($from: small) {
+        @include griddle-build($grids, "s");
+    }
+
+    // Medium
+    @include mq($from: medium) {
+        @include griddle-build($grids, "m");
+    }
+
+    // Large
+    @include mq($from: large) {
+        @include griddle-build($grids, "l");
+    }
+
+    // Extra Large
+    @include mq($from: xlarge) {
+        @include griddle-build($grids, "xl");
+    }
+}
+
+
+// ==========================================================================
+// # COLUMN MODIFIERS
+// ==========================================================================
+
+// FLEX-COL
+// ==========================================================================
+.gc--flex-col {
+    .flexbox & {
+        @include flex-col;
+    }
+}
+
+// VERITCAL ALIGN: TOP
+// ==========================================================================
+.gc--vtop {
+    align-self: flex-start;
+}
+
+// VERITCAL ALIGN: MIDDLE
+// ==========================================================================
+.gc--vmiddle {
+    align-self: center;
+}
+
+// VERITCAL ALIGN: BOTTOM
+// ==========================================================================
+.gc--vbottom {
+    align-self: flex-end;
+}
+
+
+
+
+// ==========================================================================
+// ROW MODIFIERS
+// ==========================================================================
+
+
+// DOUBLE GUTTER
+// ==========================================================================
+
+.grid--double-gutter {
+    @include mq(large) {
+        #{$margin-left}: -$double-gutter-width;
+
+        > .gc {
+            #{$padding-left}: $double-gutter-width;
+        }
+    }
+}
+
+// HALF GUTTER
+// ==========================================================================
+
+.grid--half-gutter {
+    #{$margin-left}: -$half-gutter-width;
+
+    > .gc {
+        #{$padding-left}: $half-gutter-width;
+    }
+}
+
+// QUARTER GUTTER
+// ==========================================================================
+
+.grid--quarter-gutter {
+    #{$margin-left}: -$quarter-gutter-width;
+
+    > .gc {
+        #{$padding-left}: $quarter-gutter-width;
+    }
+}
+
+// NO GUTTER
+// ==========================================================================
+
+.grid--no-gutter {
+    #{$margin-left}: 0;
+
+    > .gc {
+        #{$padding-left}: 0;
+    }
+}
+
+
+// INLINE BLOCK
+// ==========================================================================
+
+.grid--ib,
+.grid-ib {
+    letter-spacing: -0.31em; // Remove inter-unit whitespace that appears between `inline-block` child
+    word-spacing: -0.43em; //  Remove inter-unit whitespace that appears between `inline-block` child
+
+    > .gc {
+        @include inline-block;
+        float: none;
+        letter-spacing: normal; // Reset text defaults.
+        vertical-align: top;
+        word-spacing: normal; // Reset text defaults.
+    }
+}
+
+// CENTERED
+// ==========================================================================
+
+.grid--center {
+    justify-content: center;
+}
+
+// LEFT
+// ==========================================================================
+
+.grid--left {
+    justify-content: left;
+}
+
+
+// RIGHT
+// ==========================================================================
+
+.grid--right {
+    justify-content: right;
+}
+
+
+// DIVIDED
+// ==========================================================================
+
+.grid--divided, {
+    > .gc {
+        margin-bottom: $gutter;
+    }
+}
+
+
+// VERITCAL ALIGN: MIDDLE
+// ==========================================================================
+
+.grid--vmiddle {
+    align-items: center;
+
+    > .gc {
+        vertical-align: inherit;
+    }
+}
+
+// VERITCAL ALIGN: BOTTOM
+// ==========================================================================
+
+.grid--vbottom {
+    align-items: flex-end;
+
+    > .gc {
+        vertical-align: inherit;
+    }
+}
+
+// REVERSE (Flexbox only)
+// ==========================================================================
+
+.grid--reversed {
+    flex-direction: row-reverse;
+}
+
+// # SEPARATED content
+// ==========================================================================
+.grid--separated {
+    overflow-x: hidden;
+    transform:  translateX(rem(-1));
+
+    .gc {
+        position:  relative;
+        transform: translateX(rem(1));
+
+        &:not(:last-child)::after {
+            background: map-deep-get($brand-colors, grey, dark);
+            bottom: 0;
+            content:  "";
+            position: absolute;
+            right: -$half-gutter-width;
+            top:    0;
+            width:  rem(1);
+        }
+    }
+}
+
+
+
+
+
+// GRID LANDMARK
+// Adding landmark spacing to all but the last column
+// ==========================================================================
+.grid--landmark {
+    margin-bottom: -$half-spacing-unit;
+
+    @include mq(medium) { margin-bottom: -$spacing-unit; }
+
+    .gc { @include landmark; }
+}
+
+
+.grid--landmark-double {
+    margin-bottom: -$spacing-unit;
+
+    @include mq(medium) { margin-bottom: -$double-spacing-unit; }
+
+    .gc { @include landmark($double-spacing-unit); }
+}
+
+
+
+
+
+// # FIXED ASPECT RATIO
+// ==========================================================================
+
+// The best x-browser way of creating elements that have a fixed
+// ratio is to use `vw` & `vh` units. I'd suggest creating custom
+// classes for this. If you need the element to break the aspect ratio
+// if there is too much then use `max-height` and/or `max-width`. There
+// are `vmin` & `vmax` but they are not support in IE11.
+
+
+// EXAMPLES
+// ==========================================================================
+
+// .gc--fixed-ratio {
+//     &-1 {
+//         height: 100vw;
+//         width: 100vw;
+//     }
+//
+//     // Using `vw` for both dimentions means that they
+//     // are both base on the same window dimention. Here
+//     // they are both using the browser to set the size
+//     // of the column.
+//     &-16-9 {
+//         height: 56.25vw;
+//         width: 100vw;
+//     }
+// }

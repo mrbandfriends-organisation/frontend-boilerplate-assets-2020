@@ -1,0 +1,36 @@
+// ==========================================================================
+//
+// LAZYSIZES
+//
+// Description: Adding lazysizes styles
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.lazyload { background-color: color-get(primary); }
+
+
+
+
+
+// ==========================================================================
+// # NO-JS
+// ==========================================================================
+
+// scss-lint:disable MergeableSelector
+// Seperated for clarify and to be near `img` no-js styles
+.lazyload {
+    .no-js & {
+        background-color: palette(primary, default);
+        color: #fff;
+    }
+}
+
+img.lazyload {
+    .no-js & {
+        display: none;
+    }
+}

@@ -1,0 +1,33 @@
+// ==========================================================================
+//
+// BACKGROUND IMAGE
+//
+// Description: Background image with blur up placeholder
+//
+// ==========================================================================
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+.background-image {
+    position: relative;
+}
+
+.background-image,
+.background-image__placeholder {
+    @include base-background(50% 50%);
+    height: 100%;
+    width: 100%;
+}
+
+.background-image__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    .lazyloaded & {
+        opacity: 0;
+        transition: opacity 250ms ease-in-out;
+    }
+}

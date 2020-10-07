@@ -1,0 +1,69 @@
+// ============================================================
+
+// MODULE: SVG ICONS
+
+// Description: Styles for our SVG icons
+
+// ============================================================
+
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+// Ensure SVG defs are hidden
+.svg-defs {
+    display: none;
+}
+
+
+.svg-icon {
+    fill: #fff;
+    height: rem($spacing-unit);
+    width: rem($spacing-unit);
+}
+
+.svg-icon--small {
+    height: rem($half-spacing-unit);
+    width: rem($half-spacing-unit);
+}
+
+.svg-icon--large {
+    height: rem($spacing-unit + $half-spacing-unit);
+    width: rem($spacing-unit + $half-spacing-unit);
+}
+
+
+
+
+
+// ==========================================================================
+// # COLOUR
+// ==========================================================================
+
+
+@mixin icon-color($fill: null, $color-shade: default) {
+    @if($fill != false) {
+        $color-shade-modifier: "";
+
+        @if( $color-shade != default ) {
+            $color-shade-modifier: $color-shade + "-";
+        }
+
+        .svg-icon--#{$color-shade-modifier}#{$fill} {
+            fill: color-get($fill, $color-shade);
+        }
+    }
+}
+
+@each $color, $default-shade in $brand-colors {
+    @include icon-color($color);
+
+    @if( map-has-nested-keys($brand-colors, $color, light) == true) {
+        @include icon-color($color, light);
+    }
+
+    @if( map-has-nested-keys($brand-colors, $color, dark) == true) {
+        @include icon-color($color, dark);
+    }
+}

@@ -1,0 +1,524 @@
+// ==========================================================================
+// MIXINS
+//
+// Description: global application wide mixins
+//
+// ==========================================================================
+
+
+
+// ==========================================================================
+// TYPOGRAPHY
+// ==========================================================================
+
+// # RESPONSIVE TYPE
+// # creates a font-size that scales "appropriately" based on the viewport
+// ==========================================================================
+@mixin responsive-type($font-size-px) {
+    font-size: rem($font-size-px/1.5);
+
+    @include mq($from: medium) {
+        font-size: rem($font-size-px/1.25);
+    }
+
+    @include mq($from: large) {
+        font-size: rem($font-size-px);
+    }
+}
+
+
+// HEADINGS
+// Easily create and apply styles to multiple heading levels
+// ==========================================================================
+@mixin headings($from: 1, $to: 6) {
+    @for $i from $from through $to {
+        h#{$i}, .h#{$i}, %h#{$i} {
+            @content;
+        }
+    }
+}
+
+// Gets the $title-typeset map. Grabs the nested font-sizes & line heights
+// Created this mixin to allow for usage with CMS headings and other classes
+//
+//
+// This was on _title.scss but needed to be moved to be used on _typography.scss
+@mixin heading($key: false) {
+
+    @if map-has-key($headings-typeset, $key) {
+
+        // iterate through definition
+        @each $size, $config in map-get($headings-typeset, $key) {
+            @if ($size == default) {
+                @include mq($until: medium) {
+                    @include _heading($config);
+                }
+            } @else {
+                @include _heading($config);
+            }
+        }
+    } @else {
+
+        @error "Sorry, but `#{$key}` is not listed in the headings-typeset map.";
+    }
+
+}
+
+@mixin _heading($config) {
+    // get config
+    $font-size:   map-get($config, font-size);
+    $line-height: map-get($config, line-height);
+
+    // munge line height
+    @if ($line-height > 3) {
+        $line-height: $line-height / $font-size;
+    }
+
+    // output
+    font-size:   $font-size;
+    line-height: $line-height;
+}
+
+
+
+
+
+// ==========================================================================
+// LAYOUT
+// ==========================================================================
+
+// CLEARFIX
+// ==========================================================================
+@mixin clearfix {
+    zoom: 1;
+
+    &:before {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+}
+
+// LIST RESET
+// resets a list removing all styling and box model attributes
+// ==========================================================================
+@mixin list-reset {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+// INLINE BLOCK
+// Bourbon is deprecating but we still need it!
+// ==========================================================================
+@mixin inline-block {
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+    // scss-lint:disable PropertySpelling
+    *display: inline;
+    // scss-lint:disable PropertySpelling
+    *vertical-align: auto;
+}
+
+
+// LANDMARK
+// Adding `margin-bottom` to an element
+// ==========================================================================
+@mixin landmark($size: $spacing-unit) {
+    margin-bottom: $size / 2;
+
+    @include mq(medium) { margin-bottom: $size; }
+}
+
+
+
+
+
+// # BILLBOARD
+//
+// Full height section with a fullbleed background image
+// ==========================================================================
+
+@mixin billboard($height: 56.25vw, $position: 50% 0%, $bgc: primary) {
+    @include base-background($position, color-get($bgc));
+    display: block;
+    height: $height; // Default height is that of a 16:9 image
+    max-height: 100vh;
+    width: 100%;
+}
+
+
+
+
+
+// ==========================================================================
+// CSS
+// ==========================================================================
+
+// BUTTONS
+// ==========================================================================
+@mixin btn {
+    @include inline-block;
+    position: relative;
+    z-index: 1;
+    padding: rem(15px) rem(30px);
+    border: 0;
+    border-radius: rem(4px);
+    color: #fff;
+    font-size: rem(19px);
+    line-height: rem(19px);
+    background-color: #ccc;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color ease-in-out 0.25s;
+}
+
+@mixin btn-color($bg-color: #ccc, $color: #fff) {
+    color: $color;
+    background-color: $bg-color;
+
+    &:hover,
+    &:focus {
+        background-color: lighten($bg-color, 15%);
+        color: $color;
+    }
+}
+
+// # EVENT WRAPPER
+// credit: Harry Roberts
+// https://twitter.com/csswizardry/status/478938530342006784
+// ==========================================================================
+@mixin on-event($self: false) {
+    @if $self {
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    }
+}
+
+
+// SELECTION
+// Mixin for selection markup
+// ==========================================================================
+@mixin selection($background, $color, $element:false) {
+    @if($element) {
+        // scss-lint:disable VendorPrefix
+        &::-moz-selection { background: $background; color: $color; text-shadow: none; }
+        &::selection { background: $background; color: $color; text-shadow: none; }
+    } @else {
+        // scss-lint:disable VendorPrefix
+        ::-moz-selection { background: $background; color: $color; text-shadow: none; }
+        ::selection { background: $background; color: $color; text-shadow: none; }
+    }
+}
+
+// PLACEHOLDER
+// Mixin for placeholder styling
+// ==========================================================================
+@mixin placeholder($color) {
+    &::-webkit-input-placeholder { color: $color; }
+    // scss-lint:disable VendorPrefix
+    &:-moz-placeholder { color: $color; }
+}
+
+// TAB FOCUS
+// Webkit-style focus
+// ==========================================================================
+@mixin tab-focus {
+    outline: thin dotted #333;
+    // scss-lint:disable DuplicateProperty
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+// VENDOR
+// ==========================================================================
+@mixin vendor($property, $value...) {
+    -webkit-#{$property}: $value;
+    -moz-#{$property}: $value;
+    -ms-#{$property}: $value;
+    -o-#{$property}: $value;
+    #{$property}: $value;
+}
+
+
+// POINTER EVENTS
+// The CSS property pointer-events allows authors to control under what
+// circumstances (if any) a particular graphic element can become the target of
+// mouse events.
+// @see https://developer.mozilla.org/en/CSS/pointer-events
+// ==========================================================================
+@mixin pointer-events($type: none) {
+    $type: unquote($type);
+    @include experimental(pointer-events, $type,
+        -moz, -webkit, not -o, not -ms, -khtml, official
+    );
+}
+
+
+// =============================================================================
+// GRID MIXINS & FUNCTIONS
+// borrowed and adapted from original source at
+// https://raw.github.com/necolas/griddle/master/_griddle-build.scss
+// =============================================================================
+
+// Fluid grid units
+// modified from original to remove "modifier" and replace
+// with "prefix" which is better suited to our grid system
+@mixin griddle-build($units, $prefix: "gc") {
+
+    // Proportional units
+    // ==========================================================================
+
+
+
+    // Specify the proportional width of an object.
+    // Primarily for, but not limited to, use with `.grid__cell` components.
+    // Intentional redundancy build into each set of unit classes.
+
+
+    @each $n in $units {
+        // Avoid creating rules like `.unit-12-12 {}`
+        $x: $n;
+
+        @for $i from 1 through $x {
+            // Initialize variables
+            $i-r: 0;
+            $n-r: 0;
+
+            // Find the greatest common factor
+            $g: gcf($i, $n);
+
+            @if $g > 1 {
+                // Reduced value of $i
+                $i-r: $i/$g;
+                // Reduced value of $n
+                $n-r: $n/$g;
+            }
+
+            // Check if the reduced value of $n was also supplied in the list
+            // of units to be built
+            $canreduce: contains($units, $n-r);
+
+            // Create units based on fractions
+            .#{$prefix}#{$i}-#{$n},
+            %#{$prefix}#{$i}-#{$n} {
+                // If this unit can be reduced then extend the previous rule
+                @if $canreduce {
+                    // scss-lint:disable PlaceholderInExtend
+                    @extend .#{$prefix}#{$i-r}-#{$n-r};
+                } @else { // Otherwise create a new % width
+                    @include grid-column($i, $n);
+                }
+            }
+        }
+    }
+}
+
+
+@mixin grid-column($proportion, $context) {
+    width: percentage($proportion / $context);
+
+    .flexbox & {
+        flex-basis: percentage($proportion / $context);
+        max-width: percentage($proportion / $context);
+        width: auto;
+    }
+}
+
+
+///
+/// Creates a edge-triangle on one of the edges of an element
+///
+/// @author Eduardo Boucas
+///
+/// @param {String}   $pos - Which edge to create the edge-triangle on
+/// @param {Length}   $offset - The offset from the origin (top or left) on the edge
+/// @param {String}   $direction - Direction of the edge-triangle (in or out)
+/// @param {Length}   $width - Width of the edge-triangle
+/// @param {String}   $type - Type of the pseudo-element (before or after)
+///
+/// @example scss - A edge-triangle on the left edge of the parent, 15px from the top, pointing out with a width of 30px
+///  @include edge-triangle('left', 15px, 'out', 30px);
+///
+/// @example scss - A edge-triangle on the bottom edge of the parent, 220px from the left, pointing out, with a width of 60px and using a :before
+///  @include edge-triangle('bottom', 220px, 'out', 60px, 'before');
+///
+@mixin edge-triangle($pos, $offset, $direction, $width, $type: "after") {
+    position: relative;
+
+    &:#{$type} {
+        bottom: auto;
+        content: "";
+        left: auto;
+        // Reset position and offsets
+        position: absolute;
+        right: auto;
+        top: auto;
+        z-index: 9999;
+
+        $h-offset: 0;
+        $v-offset: 0;
+
+        // Triangle: down
+        @if ((($pos == "top") and ($direction == "in")) or ($pos == "bottom") and ($direction == "out")) {
+            border-bottom: 0;
+            border-left: $width solid transparent;
+            border-right: $width solid transparent;
+            border-top: $width solid currentColor;
+
+            $v-offset: if($direction == 'in', 0, -$width);
+        }
+
+        // Triangle: up
+        @if ((($pos == "top") and ($direction == "out")) or ($pos == "bottom") and ($direction == "in")) {
+            border-bottom: $width solid currentColor;
+            border-left: $width solid transparent;
+            border-right: $width solid transparent;
+            border-top: 0;
+
+            $v-offset: if($direction == 'in', 0, -$width);
+        }
+
+        // Triangle: right
+        @if ((($pos == "left") and ($direction == "in")) or ($pos == "right") and ($direction == "out")) {
+            border-bottom: $width solid transparent;
+            border-left: $width solid currentColor;
+            border-right: 0;
+            border-top: $width solid transparent;
+
+            $h-offset: if($direction == 'in', 0, -$width);
+        }
+
+        // Triangle: left
+        @if ((($pos == "left") and ($direction == "out")) or ($pos == "right") and ($direction == "in")) {
+            border-bottom: $width solid transparent;
+            border-left: 0;
+            border-right: $width solid currentColor;
+            border-top: $width solid transparent;
+
+            $h-offset: if($direction == 'in', 0, -$width);
+        }
+
+        @if ($pos == "top") {
+            left: if($offset == 'center', calc(50% - #{$width}), $offset);
+            top: $v-offset;
+        } @else if ($pos == "bottom") {
+            bottom: $v-offset;
+            left: if($offset == 'center', calc(50% - #{$width}), $offset);
+        } @else if ($pos == "left") {
+            left: $h-offset;
+            top: if($offset == 'center', calc(50% - #{$width}), $offset);
+        } @else if ($pos == "right") {
+            right: $h-offset;
+            top: if($offset == 'center', calc(50% - #{$width}), $offset);
+        }
+      }
+}
+
+// ==========================================================================
+// # Animatable underline for content
+// ==========================================================================
+@mixin link-hover($bottom: -4px) {
+    &:after {
+        background-color: $link-color;
+        bottom: rem($bottom);
+        content: "";
+        height: rem(3px);
+        left: 0;
+        position: absolute;
+        transition: width ease-in-out 0.5s;
+        width: 0;
+    }
+
+    &:hover,
+    &:focus {
+        transition: color ease-in-out 0.5s;
+
+        &:after {
+            width: 100%;
+        }
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # HELPERS
+// ==========================================================================
+
+/// Flex Col
+/// @param {attribute} $x-align - X asis positioning
+/// @param {attribute} $y-align - Y asis positioning
+@mixin flex-col($x-align: center, $y-align: flex-start) {
+    .flexbox & {
+        align-items: $x-align;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: $y-align;
+    }
+}
+
+
+/// VH
+// Visually hiding an element form view but still readable by screenreader
+@mixin vh() {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+
+
+// ==========================================================================
+// # BASE BACKGROUND
+//
+// Used for bleed background components
+// ==========================================================================
+
+@mixin base-background($position: 50% 0%, $bgc: false) {
+    // background: rgba(map-deep-get($brand-colors, off-white, default), 0.34) $position / cover no-repeat;
+    @if($bgc != false) {
+        background-color: $bgc;
+    }
+    background-position: $position;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+
+
+// ==========================================================================
+// # LEGACY/DEPRECATED
+// ==========================================================================
+
+@mixin respond-to() {
+    @error "The respond-to mixins has be deprecated in favour of https://github.com/sass-mq/sass-mq";
+}

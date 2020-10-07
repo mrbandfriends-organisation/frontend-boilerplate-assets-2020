@@ -1,0 +1,111 @@
+// ==========================================================================
+//
+// BUTTONS
+//
+// Description: UI styles to create button-like elements
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+@mixin btn {
+    @include inline-block;
+    position: relative;
+    z-index: 1;
+    padding: rem(10px) rem(20px);
+    border: 0;
+    color: #fff;
+    background-color: color-get(primary);
+    font-size: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn {
+    @include btn;
+}
+
+
+
+// MODIFIER: DISABLED
+// ==========================================================================
+
+// scss-lint:disable ImportantRule
+@mixin btn-disabled {
+    background-color: color-get(black) !important;
+    background-image: none !important;
+    color: color-get(white) !important;
+    cursor: default !important;
+    opacity: 0.65;
+    pointer-events: none;
+
+    &:active {
+        box-shadow: none;
+    }
+}
+
+.btn[disabled],
+.btn-disabled,
+.btn--disabled {
+    @include btn-disabled;
+}
+
+
+
+
+
+// MODIFIER: POSITION
+// ==========================================================================
+
+.btn--center {
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.btn--auto-bottom { margin-top: auto; }
+
+.btn--auto-right { margin-left: auto; }
+
+.btn--auto-left { margin-right: auto; }
+
+.btn--reduced-padding {
+    padding-left: $half-spacing-unit;
+    padding-right: $half-spacing-unit;
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: BUTTON COLOR
+// ==========================================================================
+
+@mixin btn-color($color: false, $color-shade: default, $color-two: false, $color-two-shade: default) {
+    // Checking for color to exist
+    @if($color != false) {
+
+        // Checking for $color-two. If it doesn't exist then setting a default.
+        // $color-two is used for `color` property only.
+        @if( $color-two == false ) {
+            $color-two: color-get(black);
+        }
+
+        background-color: transparent;
+        border-color: color-get($color, $color-shade);
+        color: color-get($color, $color-shade);
+
+        &:hover,
+        &:focus {
+            background-color: color-get($color, $color-shade);
+            color: color-get($color-two, $color-two-shade);
+        }
+    }
+}
+
+
+
+

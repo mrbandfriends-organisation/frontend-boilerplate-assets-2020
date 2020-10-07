@@ -1,0 +1,107 @@
+// ==========================================================================
+//
+// DEFINITION LIST
+//
+// Description: standard styles for lists of key/value term/desc pairs
+//
+// ==========================================================================
+
+
+.definitions,
+%definitions {
+    @include clearfix;
+    list-style: none;
+    margin-top: 0;
+    padding: 0;
+
+    .definitions__group,
+    .definitions__term,
+    .definitions__desc,
+    %definitions__group,
+    %definitions__term,
+    %definitions__desc,
+    dt,
+    dd {
+        @include inline-block;
+        margin: 0;
+        vertical-align: baseline;
+    }
+
+    .definitions__term,
+    %definitions__term,
+    dt {
+        margin-right: 0.3em;
+    }
+
+
+    .definitions__desc,
+    %definitions__desc,
+    dd {
+        margin-right: 1em;
+    }
+}
+
+
+
+// ==========================================================================
+// MODIFIER: DESCRIPTION PRIORITY
+// ==========================================================================
+
+.definitions--desc-priority,
+%definitions--desc-priority {
+
+    .definitions__term,
+    %definitions__term--desc-priority,
+    dt {
+        color: inherit;
+        font-weight: normal;
+    }
+
+    .definitions__desc,
+    %definitions__desc--desc-priority,
+    dd {
+        font-weight: bold;
+    }
+}
+
+// ==========================================================================
+// MODIFIER: STACKED
+// ==========================================================================
+
+.definitions--stacked,
+%definitions--stacked {
+
+    .definitions__term,
+    .definitions__desc,
+    %definitions__term--stacked,
+    %definitions__desc--stacked,
+    dt,
+    dd {
+        display: block;
+        float: left;
+    }
+
+    .definitions__term,
+    %definitions__term--stacked,
+    dt {
+
+        clear: left;
+    }
+
+}
+// ==========================================================================
+// MODIFIER: VERTICALLY SPACED
+// ==========================================================================
+
+.definitions--v-spaced,
+%definitions--v-spaced {
+
+    .definitions__term,
+    .definitions__desc,
+    %definitions__term--v-spaced,
+    %definitions__desc--v-spaced,
+    dt,
+    dd {
+        margin-bottom: $half-spacing-unit;
+    }
+}

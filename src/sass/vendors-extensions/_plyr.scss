@@ -1,0 +1,76 @@
+// ==========================================================================
+//
+// PLYR
+//
+// Description: Plyr vender overides
+//
+// ==========================================================================
+
+// ==========================================================================
+// # VARIABLES
+// ==========================================================================
+
+$plyr-active-color: color-get(primary);
+
+
+
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+// Added `[class]` for specifcity to avoid nessting under `--modifier` classes
+.plyr__controls[class] {
+    .flexbox & { justify-content: flex-end; }
+
+    button {
+        border-radius: 0;
+
+        &:hover,
+        &:focus { background-color: $plyr-active-color; }
+
+        &[data-plyr="play"],
+        &[data-plyr="pause"] { margin-right: auto; }
+    }
+}
+
+
+.plyr__play-large {
+    background-color: transparent;
+    border-width: 3px;
+
+    &:hover,
+    &:focus { background-color: $plyr-active-color; }
+}
+
+
+.plyr__progress--played,
+.plyr__volume--display {
+    color: $plyr-active-color;
+}
+
+
+.plyr {
+    // Nested and target via element for specificty...
+    input.plyr__volume--input {
+        &:active {
+
+            // scss-lint:disable NestingDepth
+            &::-webkit-slider-thumb {
+                background: $plyr-active-color;
+                border-width: 2px;
+            }
+
+            &::-moz-range-thumb {
+                background: $plyr-active-color;
+                border-width: 2px;
+            }
+
+            &::-ms-thumb {
+                background: $plyr-active-color;
+                border-width: 2px;
+            }
+        }
+    }
+}

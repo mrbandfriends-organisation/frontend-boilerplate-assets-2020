@@ -1,0 +1,206 @@
+// ==========================================================================
+// TYPOGRAPHY
+//
+// Description: base typography styles to apply globally
+// ==========================================================================
+
+// ==========================================================================
+// GLOBAL
+// ==========================================================================
+
+html {
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+}
+
+body {
+    @include wf-primary;
+    color: $base-font-color;
+    font-family: $base-font-family;
+    font-size: 1rem;
+}
+
+@mixin text-color($color: false, $color-modifier: default) {
+    @if($color) {
+        $color-modifier-modifier: "";
+
+        @if( $color-modifier != default ) {
+            $color-modifier-modifier: $color-modifier + "-";
+        }
+
+        .text--#{$color-modifier-modifier}#{$color} {
+            color: map-deep-get($brand-colors, $color, $color-modifier);
+        }
+    }
+}
+
+@each $color, $default-shade in $brand-colors {
+    @include text-color($color);
+
+    @if( map-has-nested-keys($brand-colors, $color, light) == true) {
+        @include text-color($color, light);
+    }
+
+    @if( map-has-nested-keys($brand-colors, $color, dark) == true) {
+        @include text-color($color, dark);
+    }
+}
+
+
+
+
+
+// # MODIFIER: SMALLER TYPE SIZES
+// ==========================================================================
+
+@each $item in $alt-body-type {
+    $key: nth($item, 1);
+    $value: nth($item, 2);
+
+    .text--#{$key} {
+        font-size: rem(map-deep-get($alt-body-type, $key, font-size));
+        line-height: rem(map-deep-get($alt-body-type, $key, line-height));
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// EMPHASIS
+// ==========================================================================
+
+strong,
+b,
+.text--bold {
+    @include wf-secondary;
+}
+
+
+
+
+
+// ==========================================================================
+// PARAGRAPHS
+// ==========================================================================
+
+p {
+    margin: 0 0 $half-spacing-unit;
+}
+
+.muted {
+    color: #999;
+}
+
+.reduced {
+    font-size: 0.9em;
+}
+
+
+
+
+
+// ==========================================================================
+// LINKS
+// ==========================================================================
+
+a {
+    color: color-get(primary);
+}
+
+a:hover,
+a:focus {
+    @if( map-has-nested-keys($brand-colors, primary, light) == true) {
+        color: color-get(primary, light);
+    } @else {
+        color: lighten(color-get(primary), 15%);
+    }
+}
+
+a:focus {
+    outline: thin dotted;
+}
+
+a:hover,
+a:active {
+    outline: none;
+}
+
+
+
+
+
+// ==========================================================================
+// LISTS
+// ==========================================================================
+
+// Standard List
+// ==========================================================================
+
+ul,
+ol {
+    margin: 0 0 $base-line-height 25px;
+    padding: 0;
+}
+
+// Nested lists
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style: disc;
+}
+
+ol {
+    list-style: decimal;
+}
+
+li {
+    line-height: $base-line-height;
+}
+
+
+
+
+
+// Definition List
+// ==========================================================================
+
+dd {
+    margin-left: 0;
+}
+
+
+
+
+
+// ==========================================================================
+// ADDRESS
+// ==========================================================================
+
+address {
+    font-style: normal;
+    margin-bottom: $base-line-height;
+}
+
+
+
+
+
+// ==========================================================================
+// IMAGES
+// ==========================================================================
+
+// Set things up for responsive
+img {
+    border: 0;
+    height: auto;
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
+    vertical-align: middle;
+}

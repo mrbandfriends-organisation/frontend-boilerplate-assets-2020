@@ -1,0 +1,173 @@
+// ============================================================
+
+// MODULE: SLANTED
+
+// Description: provides ability to enhance sectioning elements
+// with slanted edges
+
+// ============================================================
+
+
+// ==========================================================================
+// # MIXINS
+// ==========================================================================
+
+@mixin drawer-closed-state() {
+    // Animation initial state
+    //height: 0;
+
+    // overflow: hidden;
+    // left: -999em;
+    // top: auto;
+
+    //max-height: 0;
+    //transform: translateY(-1600px);
+    //transform: translate3d(0,-1600px,0);
+}
+
+@mixin drawer-transitioning-state() {
+    //height: auto;
+    //left: auto;
+    //overflow: hidden;
+}
+
+@mixin drawer-open-state() {
+
+    //left: auto;
+    //height: auto;
+    //overflow: auto;
+    //top: auto;
+
+    //max-height: 2000px;
+   // transform: translate3d(0,0,0);
+}
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+// # CONTENT
+// ==========================================================================
+.slanted__content {
+    position: relative;
+    z-index: 2;
+
+    &:after {
+        background-color: inherit;
+        bottom: 0;
+        content: "";
+        display: block;
+        left: -70px;
+        position: absolute;
+        right: -70px;
+        top: 0;
+
+        transform: rotate(0);
+        transform-origin: right center;
+        transition: transform 0.2s linear;
+
+        z-index: -1;
+    }
+}
+
+
+// # SLIDING DRAWER
+// ==========================================================================
+
+.slanted__drawer {
+    background-color: #565a5d;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+
+    .cssanimations & {
+        @include animation(openDrawer 1s ease-in);
+        @include animation-play-state(paused);
+    }
+
+    > :first-child {
+        padding-top: 20%;
+
+        @include mq($from: small) {
+            padding-top: 15%;
+        }
+
+        @include mq($from: medium) {
+            padding-top: 5%;
+
+            .cssanimations & {
+                padding-top: 10%;
+            }
+        }
+    }
+}
+
+
+// ==========================================================================
+// # STATE: EXPANDED
+// ==========================================================================
+
+.slanted.is-expanded {
+    overflow: hidden;
+
+    .slanted__drawer {
+        .cssanimations & {
+            @include animation-fill-mode(forwards);
+            @include animation-play-state(running);
+        }
+    }
+
+    .slanted__content:after {
+        transform: rotate(-3deg);
+        transition: transform 0.2s linear;
+    }
+}
+
+
+.slanted.is-closed {
+    .slanted__drawer {
+        .cssanimations & {
+            @include animation(closeDrawer 1s ease-in);
+            @include animation-play-state(running);
+            @include animation-fill-mode(forwards);
+        }
+    }
+}
+
+
+// ==========================================================================
+// # KEYFRAME ANIMATIONS
+// ==========================================================================
+
+
+
+
+@include keyframes(openDrawer) {
+    0% {
+        @include drawer-closed-state();
+    }
+
+    1% {
+        @include drawer-transitioning-state();
+    }
+
+    100% {
+        @include drawer-open-state();
+    }
+}
+
+@include keyframes(closeDrawer) {
+    0% {
+        @include drawer-open-state();
+    }
+
+    99% {
+        @include drawer-transitioning-state();
+    }
+
+    100% {
+        @include drawer-closed-state();
+    }
+
+}

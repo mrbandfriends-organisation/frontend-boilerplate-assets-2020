@@ -1,0 +1,83 @@
+// ==========================================================================
+//
+// BANNER
+//
+// Description: layout and styling for primary banner/header of site
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.banner {
+    background-color: color-get(grey, light);
+    padding: 0;
+    position: relative;
+    width: 100%;
+    z-index: $zindex-tier-1;
+
+    &--transparent {
+        background-color: transparent;
+    }
+}
+
+.banner__inner {
+    display: table;
+    padding-bottom: $half-spacing-unit;
+    padding-top: $half-spacing-unit;
+    position: relative;
+
+    .flexbox & {
+        align-items: center;
+        display: flex;
+        flex-direction: flip(row, row-reverse);
+    }
+}
+
+// ==========================================================================
+// # SECTION
+// ==========================================================================
+// scss-lint:disable EmptyRule
+.banner__section {
+    display: block;
+
+    @include mq($from: nav-break-2) {
+        display: table-cell;
+        vertical-align: middle;
+
+        .flexbox & {
+            display: block;
+            flex: 0 0 auto;
+            vertical-align: initial;
+        }
+    }
+}
+
+// ==========================================================================
+// # BRAND
+// ==========================================================================
+
+.banner__brand {
+    margin-bottom: $half-spacing-unit;
+
+    @include mq($from: nav-break-2) {
+        margin-bottom: auto;
+    }
+
+    .cuts-the-mustard & {
+        margin-bottom: auto;
+    }
+
+}
+
+// ==========================================================================
+// # NAV
+// ==========================================================================
+
+.banner__nav {
+
+    .flexbox & {
+        flex-grow: 1;
+    }
+}

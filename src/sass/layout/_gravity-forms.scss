@@ -1,0 +1,114 @@
+// scss-lint:disable SelectorFormat
+//
+// ==========================================================================
+//
+// GRAVITY FORMS
+//
+// Description: standard base styles for Gravity Forms WordPress plugin
+//
+// ==========================================================================
+
+// ==========================================================================
+// # FORM DESCRIPTION
+// ==========================================================================
+
+.gform_description {
+    display: block;
+    margin-bottom: $half-spacing-unit;
+}
+
+// ==========================================================================
+// FIELDS
+// ==========================================================================
+
+// Fields list container
+.gform_fields {
+    @include list-reset;
+}
+
+// Individual field
+.gfield {
+    @include clearfix;
+    padding-bottom: $spacing-unit;
+}
+
+
+// ==========================================================================
+// FIELD TYPES
+// ==========================================================================
+
+// SUBMIT
+// ==========================================================================
+
+.gform_button {
+    @include btn;
+    @include btn-color(primary);
+    height: rem(40px);
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+// FIELD DESC
+// ==========================================================================
+
+.gfield_description {
+    color: #999;
+    font-size: rem(13px);
+    line-height: 1.2;
+    margin-top: $half-spacing-unit;
+}
+
+// COMPLEX (eg: address...etc)
+// ==========================================================================
+
+.ginput_complex {
+    label {
+        font-size: 0.9em;
+        font-weight: normal;
+    }
+}
+
+// REQUIRED
+// ==========================================================================
+
+.gfield_required {
+    color: $error-text;
+    font-weight: normal;
+    margin-left: 0.1em;
+}
+
+// HIDDEN
+// ==========================================================================
+
+.gform_hidden {
+    @include vh();
+}
+
+
+// ==========================================================================
+// MESSAGES
+// ==========================================================================
+
+// ALERTS
+// ==========================================================================
+//
+.validation_error {
+    @include alert();
+    @include alert-danger();
+}
+
+
+// ERRORS
+// ==========================================================================
+
+.gfield_error {
+    input,
+    select,
+    textarea {
+        border-color: $error-text;
+    }
+
+    .gfield_description {
+        color: $error-text;
+    }
+}

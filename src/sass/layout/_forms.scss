@@ -1,0 +1,459 @@
+// ==========================================================================
+//
+// BUTTONS
+//
+// Description: UI styles to create button-like elements
+//
+// ==========================================================================
+
+// ==========================================================================
+// # TYPOGRAPHY
+// ==========================================================================
+input,
+label,
+select {
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+}
+
+
+// ==========================================================================
+// # ELEMENTS
+// ==========================================================================
+
+// # FIELDSET
+// ==========================================================================
+
+fieldset {
+    border: 0;
+    margin: 0 0 $half-spacing-unit;
+    padding: 0;
+}
+
+// # LABELS
+// ==========================================================================
+%form-label,
+label {
+    @include wf-primary;
+    display: block;
+    font-weight: 600;
+    margin-bottom: $quarter-spacing-unit;
+
+    &.required::after { content: "*"; }
+
+    abbr { display: none; }
+}
+
+// # GLOBAL INPUTS
+// ==========================================================================
+
+input:not([type=submit]):not([type=file]),
+select,
+textarea {
+    background-color: $base-background-color;
+    border: $base-border;
+    border-radius: 0;
+    box-shadow: $form-box-shadow;
+    box-sizing: border-box;
+    display: block;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    margin-bottom: $spacing-unit / 2;
+    padding: $half-spacing-unit;
+    transition: border-color;
+    width: 100%;
+
+    &:hover {
+        border-color: darken($base-border-color, 10%);
+    }
+
+    &:focus {
+        box-shadow: $form-box-shadow-focus;
+        outline: none;
+    }
+
+    // DISABLED
+    &:disabled {
+        background-color: darken($base-background-color, 6%);
+        cursor: not-allowed;
+
+        &:hover {
+            border: $base-border;
+        }
+    }
+}
+
+// # SELECT
+// ==========================================================================
+
+select {
+    appearance: none;
+    background-color: $base-background-color;
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+        background-color: #fefefe;
+    }
+
+    .lt-ie9 & {
+        background-image: none;
+        padding-right: $half-spacing-unit;
+    }
+
+}
+
+// # TEXTAREA
+// ==========================================================================
+
+textarea {
+    resize: vertical;
+}
+
+// # SEARCH
+// ==========================================================================
+
+input[type="search"] {
+    appearance: none;
+}
+
+input[type="search"]::-webkit-search-decoration {
+    display: none;
+}
+
+// # CHECKBOXES/RADIO
+// ==========================================================================
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline;
+    margin-right: $half-spacing-unit / 2;
+}
+
+
+
+
+// # FILE
+// ==========================================================================
+
+input[type="file"] {
+    padding-bottom: $half-spacing-unit;
+    width: 100%;
+}
+
+
+// # BUTTONS & SUBMITS
+// ==========================================================================
+
+button[type="submit"], // you cannot apply this as a global style
+input[type="reset"],
+input[type="submit"],
+input[type="button"] {
+    @include btn;
+    @extend %btn--primary !optional;
+    // Remove native appearance
+    appearance: none;
+    cursor: pointer;
+    margin: 0;
+    outline: 0;
+    overflow: visible;
+
+    // Kill phantom spacing and dotted
+    // border that appears in Firefox.
+    vertical-align: top;
+
+    width: auto;
+
+    &:active {
+        outline: 0;
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}
+
+// # FAUX ELEMENT
+// ==========================================================================
+
+// scss-lint:disable EmptyRule
+.form-element-faux {
+
+}
+
+.form-element-faux-label,
+.form-element-faux__label {
+    @extend %form-label;
+}
+
+// scss-lint:disable EmptyRule
+.form-element-faux__desc {
+
+}
+
+// ==========================================================================
+// # LAYOUT
+// ==========================================================================
+
+
+// # CONTROL GROUP
+// ==========================================================================
+
+.form-control-group {
+    margin-bottom: $half-spacing-unit;
+    margin-top: 0;
+
+    .form-aligned & {
+        margin-bottom: $quarter-spacing-unit;
+
+        label {
+            margin: 0 $half-spacing-unit 0 0;
+            text-align: right;
+            width: 10em;
+        }
+    }
+}
+
+.form-control-group--large {
+    margin-bottom: $spacing-unit;
+}
+
+.form-control-group--xlarge {
+    margin-bottom: $double-spacing-unit;
+}
+
+.form-control-group--centered {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
+    text-align: center;
+    width: 50%;
+}
+
+
+
+
+
+// # STACKED
+// ==========================================================================
+
+.form-stacked {
+    input:not([type=submit]):not([type=file]),
+    label,
+    select,
+    textarea {
+        display: block;
+        margin-bottom: $quarter-spacing-unit/2;
+        margin-top: $quarter-spacing-unit/2;
+    }
+}
+
+// # ALIGNED
+// ==========================================================================
+
+.form-aligned,
+.form-group--aligned {
+    input:not([type=submit]):not([type=file]),
+    label,
+    select,
+    textarea {
+        @include inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+        width: auto;
+    }
+
+    textarea {
+        vertical-align: top;
+    }
+}
+
+
+// # GROUP
+// ==========================================================================
+
+// scss-lint:disable EmptyRule
+.form-group {
+
+}
+
+.form-group--aligned label {
+    margin-right: $half-spacing-unit;
+    margin-top: 0;
+}
+
+.form-group--stacked label {
+    clear: both;
+    display: block;
+}
+
+
+// ==========================================================================
+// # CUSTOM SELECT
+// ==========================================================================
+
+@mixin form-select-custom() {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+
+    select {
+        margin-bottom: 0;
+        //padding-right: rem(40px);
+    }
+
+    .pointerevents & {
+
+        // Hide arrow in IE0+
+        select::-ms-expand {
+            display: none;
+        }
+
+        &:before {
+            background: #fff url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTE1LjQ4MyA4LjU2M2MtMC40MDcgMC40MTgtNC42OTUgNC41MDMtNC42OTUgNC41MDMtMC4yMTggMC4yMjMtMC41MDMgMC4zMzQtMC43ODggMC4zMzRzLTAuNTcxLTAuMTExLTAuNzg4LTAuMzM0YzAgMC00LjI4OC00LjA4NS00LjY5Ni00LjUwM3MtMC40MzUtMS4xNjkgMC0xLjYxNmMwLjQzNi0wLjQ0NiAxLjA0My0wLjQ4MSAxLjU3NiAwbDMuOTA4IDMuNzQ4IDMuOTA3LTMuNzQ3YzAuNTM0LTAuNDgxIDEuMTQyLTAuNDQ2IDEuNTc2IDAgMC40MzYgMC40NDYgMC40MDkgMS4xOTggMCAxLjYxNXoiPjwvcGF0aD4KPC9zdmc+Cg==") no-repeat 50% 50%;
+            bottom: 1px; // compensate for borders
+            content: "";
+            display: block;
+            pointer-events: none;
+            position: absolute;
+            right: 1px; // compensate for borders
+            top: 1px; // compensate for borders
+            width: rem(40px);
+            z-index: $zindex-tier-4;
+        }
+    }
+
+
+
+    &:hover,
+    &:focus {
+        &:before {
+            opacity: 0.6;
+        }
+    }
+}
+
+.form-select-custom {
+    @include form-select-custom();
+}
+
+
+
+// ==========================================================================
+// # CUSTOM CHECKBOX
+// ==========================================================================
+
+input[type="checkbox"] {
+    left: -9999px;
+    position: absolute;
+
+    .lt-ie9 & {
+        left: auto;
+        position: relative;
+        top: 2px;
+    }
+}
+
+// scss-lint:disable MergeableSelector
+input[type="checkbox"] + label {
+    cursor: pointer;
+    font-weight: normal;
+    position: relative;
+
+    &:before {
+        @include inline-block;
+        border: 4px solid $base-grey;
+        color: #fff;
+        content: "";
+        font-size: 10px;
+        height: 18px;
+        line-height: 10px;
+        margin-right: 1em;
+        margin-top: -3px;
+        text-align: center;
+        vertical-align: middle;
+        width: 18px;
+
+        .lt-ie9 & {
+            // scss-lint:disable ImportantRule
+            display: none !important;
+        }
+    }
+
+
+    &:hover,
+    &:focus {
+        &:before {
+            @include tab-focus();
+            background-color: $base-grey;
+            border-color: map-deep-get($brand-colors, primary, default);
+        }
+    }
+
+    &:focus {
+        &:before {
+            @include tab-focus();
+            outline: 3px solid #ffbf47;
+        }
+    }
+
+}
+
+input[type="checkbox"]:focus + label {
+    &:before {
+        @include tab-focus();
+    }
+}
+
+
+input[type="checkbox"]:checked + label {
+    &:before {
+        background-color: map-deep-get($brand-colors, primary, default);
+        border-color: map-deep-get($brand-colors, primary, default);
+        content: "✔";
+    }
+}
+
+
+
+
+
+
+// ==========================================================================
+// # OVERIDES & FIXES
+// ==========================================================================
+
+
+// Suppress red glow that Firefox
+// adds to form fields by default.
+button,
+select,
+input,
+textarea {
+    &:invalid {
+        box-shadow: none;
+    }
+}
+
+
+// # TAB FOCUS
+// ==========================================================================
+select,
+button,
+input[type="file"],
+input[type="radio"],
+input[type="checkbox"],
+input[type="reset"],
+input[type="submit"],
+input[type="button"] {
+    &:focus {
+        @include tab-focus();
+        box-shadow: none; // override for file inputs
+    }
+}

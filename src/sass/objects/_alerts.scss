@@ -1,0 +1,136 @@
+// ==========================================================================
+//
+// ALERT
+//
+// Description: standard alert styles with variations
+//
+// ==========================================================================
+
+
+// ==========================================================================
+// # MIXINS
+// ==========================================================================
+
+@mixin alert() {
+    padding: $quarter-spacing-unit;
+    margin-bottom: $spacing-unit;
+    border: 1px solid $warning-border;
+    background-color: $warning-background;
+    color: $warning-text;
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+.alert {
+    @include alert();
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+}
+
+.alert-heading {
+    color: inherit;
+}
+
+.alert--small {
+    font-size: 0.8em;
+}
+
+
+.btn--alert {
+    border-radius: 5px;
+    margin: $half-spacing-unit 0;
+}
+
+
+
+// ==========================================================================
+// MODIFIER: SUCCESS
+// ==========================================================================
+
+@mixin alert-success() {
+    background-color: $success-background;
+    border-color: $success-border;
+    color: $success-text;
+}
+
+.alert--success {
+    @include alert-success();
+}
+
+
+
+
+
+// ==========================================================================
+// MODIFIER: ERROR
+// ==========================================================================
+
+@mixin alert-danger() {
+    background-color: $error-background;
+    border-color: $error-border;
+    color: $error-text;
+}
+
+.alert--danger,
+.alert--error {
+    @include alert-danger();
+}
+
+
+
+
+
+// ==========================================================================
+// MODIFIER: INFO
+// ==========================================================================
+
+.alert--info {
+    background-color: $info-background;
+    border-color: $info-border;
+    color: $info-text;
+}
+
+
+
+
+
+// ==========================================================================
+// MODIFIER: NO POSTS
+// ==========================================================================
+
+.alert--no-posts {
+    margin-bottom: $half-spacing-unit;
+}
+
+
+
+
+
+// ==========================================================================
+// ALERT BLOCK
+// ==========================================================================
+
+.alert-block {
+    padding-bottom: $half-spacing-unit;
+    padding-top: $half-spacing-unit;
+}
+
+.alert-block > p,
+.alert-block > ul {
+    margin-bottom: 0;
+}
+
+// scss-lint:disable MergeableSelector
+.alert-block p + p {
+    padding-top: $quarter-spacing-unit;
+}

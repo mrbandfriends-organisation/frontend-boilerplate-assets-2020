@@ -1,0 +1,105 @@
+// ==========================================================================
+//
+// ACCORDION
+//
+// Description: Base Mr B Accordion styles
+//
+// ==========================================================================
+
+// ==========================================================================
+// # VARIABLES
+// ==========================================================================
+
+$accordion-border: solid 2px color-get(grey);
+
+
+
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+// .mrb-accordion {}
+
+
+
+
+
+// ==========================================================================
+// # ELEMENT: HEADER
+// ==========================================================================
+
+.mrb-accordion__header {
+    border: 0;
+    border-bottom: $accordion-border;
+    padding: $half-spacing-unit;
+    text-decoration: none;
+    transition: all ease-in-out 0.15s;
+    width: 100%;
+
+    .flexbox & {
+        align-content: space-between;
+        align-items: center;
+        display: flex;
+    }
+}
+
+
+.mrb-accordion__header-inner {
+    display: flex;
+    width: (100%);
+
+    .flexbox & {
+        align-items: center;
+        flex-grow: 1;
+    }
+}
+
+
+.mrb-accordion__header-title {
+    display: inline-block;
+    text-align: left;
+    width: calc(100% - 80px);
+
+    .flexbox & { width: 100%; }
+}
+
+
+.mrb-accordion__header-icon {
+    display: inline-block;
+    height: $spacing-unit;
+    margin-left: auto;
+    width: $spacing-unit;
+}
+
+
+
+
+
+
+// ==========================================================================
+// # ELEMENT: PANEL
+// ==========================================================================
+
+.mrb-accordion__panel {
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+    // transition is added via `mrb-accordion--initalised` to stop animation on initalition
+
+    .js & {
+        max-height: 0;
+
+        // Closing all pannels
+        // scss-lint:disable ImportantRule
+        &.is-active { max-height: 75vh; } // This should be set with JS ideally so that the transition is smoother
+
+        &.is-hidden { max-height: 0 !important; }
+    }
+
+    .mrb-accordion--initalised & { transition: all ease-in-out 0.25s; }
+}
+
+
+.mrb-accordion__panel-inner { padding: $half-spacing-unit; }

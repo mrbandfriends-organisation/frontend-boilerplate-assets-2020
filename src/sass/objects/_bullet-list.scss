@@ -1,0 +1,22 @@
+// ==========================================================================
+//
+// BULLET LIST
+//
+// Description: standard styles for bulleted lists
+//
+// ==========================================================================
+
+.bullet-list {
+    list-style-type: none;
+
+    li {
+        margin-bottom: $half-spacing-unit;
+    }
+
+    span {
+        background-position: 0 rem(11px);
+        background-repeat: no-repeat;
+        display: inline-block;
+        padding-left: rem(40px);
+    }
+}

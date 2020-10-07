@@ -1,0 +1,91 @@
+// ==========================================================================
+//
+// MR B TOGGLER
+//
+// Description: Base styles for the Mr B toggler JS component
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.mrb-toggler {
+    // height: `something` - you *MUST* have either elements inflow or
+    //                       give height value to the `toggler`.
+    overflow: hidden;
+}
+
+
+.toggler__content {
+    opacity: 0;
+    z-index: $zindex-tier-1;
+
+    &.is-active {
+        opacity: 1;
+        transition: opacity 500ms ease-in-out;
+    }
+}
+
+
+.mrb-toggler__trigger {
+    transform: translate3d(0, 0, 0);
+    z-index: $zindex-tier-2;
+
+    &.toggle--active { transform: translate3d(0, 0, 0); }
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: OUT OF FLOW
+// ==========================================================================
+
+.mrb-toggler--out-flow {
+    position: relative;
+
+    .mrb-toggler__content {
+        opacity: 1;
+        transform: translate3d(0, 100%, 0);
+        transition: transform ease-in-out 0.25s;
+
+        &.is-active {
+            position: absolute;
+            transform: translate3d(0, 0, 0);
+            transition: transform ease-in-out 0.25s;
+        }
+    }
+}
+
+
+.mrb-toggler--out-flow-left {
+    .mrb-toggler__content {
+        transform: translate3d(-100%, 0, 0);
+
+        &.is-active { transform: translate3d(0, 0, 0); }
+    }
+}
+
+
+
+
+.mrb-toggler--out-flow-top {
+    .mrb-toggler__content {
+        bottom: 100%;
+        transform: translate3d(0, 0, 0);
+
+        &.is-active { transform: translate3d(0, 100%, 0); }
+    }
+}
+
+
+// @TODO - there is a bug with these 2 modifers
+.mrb-toggler--out-flow-right {
+    .mrb-toggler__content {
+        transform: translate3d(100%, 0, 0);
+
+        &.is-active { transform: translate3d(0, 0, 0); }
+    }
+}

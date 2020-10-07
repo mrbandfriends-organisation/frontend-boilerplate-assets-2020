@@ -1,0 +1,46 @@
+// ==========================================================================
+//
+// PROGRESSIVE INLINE IMAGE
+//
+// Description: Styles for progressively loaded inline images
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.progressive-inline-image {
+    left: 0;
+    object-position: 100% 50%;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &.lazyloading { opacity: 1; }
+
+    &.lazyloaded {
+        filter: blur(0);
+        transition: filter 800ms ease-in-out, opacity 800ms ease-in-out;
+    }
+
+    @include mq($until: xlarge) {
+        object-fit: cover;
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: PORTRAIT PI IMAGE (FOR MOBILE HEIGHT)
+// ==========================================================================
+
+.progressive-inline-image--portrait {
+    @include mq($until: xlarge) {
+        height: 100%;
+        width: auto;
+    }
+}

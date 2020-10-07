@@ -1,0 +1,94 @@
+// scss-lint:disable MergeableSelector
+
+// ==========================================================================
+// # BOX SIZING
+// ==========================================================================
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+
+
+// ==========================================================================
+// # FONT ALIASING
+// ==========================================================================
+html,
+body,
+button {
+  // -moz-osx-font-smoothing: grayscale;
+  // -webkit-font-smoothing: antialiased;
+  // font-smoothing: antialiased;
+}
+
+// ==========================================================================
+// # BROWSER UPGRADE NOTICE
+// ==========================================================================
+
+.browserupgrade {
+    background-color: #ccc;
+    color: #000;
+    margin: $half-spacing-unit 0;
+    padding: $half-spacing-unit 0;
+}
+
+// ==========================================================================
+// # FONTFACE FOUT PROTECTION
+// ==========================================================================
+body {
+    opacity: 0;
+    transition: opacity 0.1s linear;
+
+    .no-cuts-the-mustard &,
+    .no-webfonts &,
+    .wf-inactive &,
+    .wf-active-1 &,
+    .no-js & {
+        // scss-lint:disable ImportantRule
+        opacity: 1 !important;
+    }
+}
+
+// ==========================================================================
+// # BREAKPOINTS TO JS
+// https://blog.hospodarets.com/passing_data_from_sass_to_js
+// ==========================================================================
+
+body {
+    &:before {
+        @include vh;
+
+        // JSON encode for access via JS
+        // font-family: sassToJs($mq-breakpoints);  // scss-lint:disable NameFormat GroupedPropertyOrder
+
+        @each $break, $dim in $mq-breakpoints {
+            @if (str-index($break, "nav-") == null) {
+
+                @include mq($break) {
+                    content: quote($break);
+                }
+            }
+        }
+    }
+
+    &:after {
+        @include vh;
+
+        // JSON encode for access via JS
+        content: sassToJs($mq-breakpoints);  // scss-lint:disable NameFormat GroupedPropertyOrder
+    }
+}
+
+.js-rimgbg:not(.-img-active) {
+    img {
+        display: none;
+    }
+}

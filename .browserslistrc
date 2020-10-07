@@ -1,0 +1,7 @@
+# Defines which browsers will automatically be polyfilled
+# you can config your own version of this at https://browserl.ist/
+
+last 2 versions
+IE 11
+not IE < 11 # we don't want less than IE11
+not < 0.05% # we don't include browsers with usage share of less than 0.05%

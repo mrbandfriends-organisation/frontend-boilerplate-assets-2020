@@ -1,0 +1,43 @@
+// ============================================================
+
+// PRIMARY OFFCANVAS
+
+// Description: styles for OffCanvas Panels
+
+// ============================================================
+
+
+// ==========================================================================
+// BASE
+// ==========================================================================
+
+.offcanvas__wrapper {
+    @include ui-offcanvas();
+
+    &.is-active {
+        .offcanvas__offscreen {
+            right: 0;
+            top: 0;
+            transition: all ease 0.25s;
+        }
+    }
+
+    @include mq(nav-break-2) {
+       .primary-offcanvas {
+            left: auto;
+       }
+    }
+}
+
+.offcanvas__offscreen {
+    background-color: color-get(grey, light);
+}
+
+.primary-offcanvas__section {
+    padding: 15px 25px;
+
+
+    @include mq($from: medium) {
+        padding: 25px 60px 25px 30px;
+    }
+}

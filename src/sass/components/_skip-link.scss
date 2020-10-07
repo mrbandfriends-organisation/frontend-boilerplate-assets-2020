@@ -1,0 +1,34 @@
+// ==========================================================================
+//
+// SKIP LINK
+//
+// Description: Link to skip main content for
+//
+// ==========================================================================
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.skip-link {
+    background-color: color-get(primary);
+    color: color-get(white);
+    height: 1px;
+    left: -1000px;
+    overflow: hidden;
+    padding: 10px;
+    position: absolute;
+    text-align: left;
+    top: -1000px;
+    width: 1px;
+
+    &:active,
+    &:focus,
+    &:hover {
+        height: auto;
+        left: 0;
+        overflow: visible;
+        top: 0;
+        width: auto;
+    }
+}

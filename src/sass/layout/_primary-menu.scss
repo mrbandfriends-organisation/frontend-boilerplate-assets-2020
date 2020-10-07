@@ -1,0 +1,53 @@
+// ==========================================================================
+//
+// PRIMARY MENU
+//
+// Description: layout and styling for primary navigation menu
+//
+// ==========================================================================
+
+
+// scss-lint:disable EmptyRule
+.menu-primary {
+
+}
+
+.menu-primary--banner {
+    @include mq($from: nav-break-2) {
+        float: flip(right, left);
+    }
+}
+
+
+// Hide banner navigation on smaller viewports when offcanvas is active
+// and the browser is modern enough to use offcanvas
+.cuts-the-mustard .menu-primary--banner {
+    @include mq($until: nav-break-2) {
+        display: none;
+    }
+}
+
+
+.menu-primary--offcanvas {
+    // To hide focus state that is applied via JS
+    outline: none;
+
+    .nav-primary {
+        @include ui-nav-menu--stacked-center();
+    }
+}
+
+
+.nav-primary {
+    @include ui-nav-menu();
+    @include ui-nav-menu--stacked();
+
+    @include mq($from: nav-break-2) {
+        @include ui-nav-menu--inline();
+        float: left;
+    }
+
+    @if ($is-oldie == true) {
+        @include ui-nav-menu--inline();
+    }
+}

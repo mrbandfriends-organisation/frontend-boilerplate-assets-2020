@@ -1,0 +1,10 @@
+css/*
+svg/sprites/standalone/*
+!svg/sprites/standalone
+svg/sprites/output/*
+!svg/sprites/output
+!.gitkeep
+node_modules
+.DS_Store
+/paths.js
+dist

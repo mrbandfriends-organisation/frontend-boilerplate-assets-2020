@@ -1,0 +1,113 @@
+// ==========================================================================
+//
+// TITLES
+//
+// Description: standard styles for headings
+//
+// ==========================================================================
+
+
+// ==========================================================================
+//    CMS HEADINGS
+// ==========================================================================
+
+@for $i from 1 through 6 {
+    h#{$i} {
+        @include wf-secondary;
+        color: color-get(grey);
+        font-size: 1.5rem;
+        line-height: 1.1;
+        margin: 0 0 0.5em;
+    }
+}
+
+h1 {
+    @include heading(bravo);
+}
+
+h2 {
+    @include heading(charlie);
+}
+
+h3 {
+    @include heading(delta);
+}
+
+h4 {
+    @include heading(echo);
+}
+
+
+
+
+
+// ==========================================================================
+// # PAGE HEADING TYPESETTING
+// ==========================================================================
+
+// Loops over each heading in our tites-typeset map
+@each $heading in $headings-typeset {
+    $key: nth($heading, 1);
+    $value: nth($heading, 2);
+
+    .heading--#{$key} {
+        @include heading($key);
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: POSITION
+// ==========================================================================
+
+.heading--center { text-align: center; }
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: WEIGHTS
+// ==========================================================================
+
+.heading--regular { @include wf-primary; }
+
+
+.heading--bold { @include wf-secondary; }
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: TITLE COLORS
+// ==========================================================================
+
+@mixin heading-color($color: false, $color-shade: default) {
+    @if($color != false) {
+        $color-shade-modifier: "";
+
+        @if( $color-shade != default ) {
+            $color-shade-modifier: $color-shade + "-";
+        }
+
+        .heading--#{$color-shade-modifier}#{$color} {
+            color: color-get($color, $color-shade);
+        }
+    }
+}
+
+@each $color, $default-shade in $brand-colors {
+    @include heading-color($color);
+
+    @if( map-has-nested-keys($brand-colors, $color, light) == true) {
+        @include heading-color($color, light);
+    }
+
+    @if( map-has-nested-keys($brand-colors, $color, dark) == true) {
+        @include heading-color($color, dark);
+    }
+}

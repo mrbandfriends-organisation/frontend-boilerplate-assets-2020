@@ -1,0 +1,19 @@
+// ==========================================================================
+//
+// PLAN LINK
+//
+// Description: styles to make text hyperlinks look and feel like a standard
+// piece of document flow text
+//
+// ==========================================================================
+
+.plain-link {
+    color: map-deep-get($brand-colors, grey, default);
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: map-deep-get($brand-colors, grey, dark);
+        text-decoration: none;
+    }
+}

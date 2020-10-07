@@ -1,0 +1,434 @@
+// ==========================================================================
+// BRAND
+// ==========================================================================
+
+// BRAND COLOURS
+// ==========================================================================
+
+$brand-colors: (
+    primary: (default: #da6a32, light: #e6ad8e),
+    secondary: (default: #f08500),
+    tertiary: (light: #66c4bd, default: #00b0a6),
+    grey: (light: #ececec, default: #414141, dark: #666, darker: #3c3c3c),
+    cream: (default: #f4f2ed, darker: #bfb8b0),
+    off-white: (default: #f9f9f9),
+    white: (default: #fff),
+    black: (default: #000)
+);
+
+$base-background-color: #fff;
+$base-border-color: #666;
+$base-grey: #666;
+$base-border: 1px solid $base-border-color;
+
+// Social Colors
+// ====================================================================
+
+$facebook-color: hsla(222, 47%, 40%, 1); // #365397
+$twitter-color: hsla(198, 100%, 47%, 1); // #00a9f1
+$linkedin-color: hsla(203, 100%, 35%, 1); // #006db3
+$apple-color: hsla(0, 0%, 45%, 1); // #737373
+$google-color: hsla(217, 89%, 61%, 1); // #4285f4
+$google-plus-color: hsla(8, 74%, 53%, 1); // #e0452c
+$youtube-color: hsla(0, 100%, 60%, 1); // #ff3333
+$vimeo-color: hsla(200, 82%, 61%, 1); // #48b6ed
+$pinterest-color: hsla(0, 78%, 45%, 1); // #ce1a19
+$yelp-color: hsla(5, 100%, 38%, 1); // #c30f00
+$dribbble-color: hsla(338, 82%, 60%, 1); // #ed4584
+$amazon-color: hsla(36, 100%, 50%, 1); // #ff9700
+$ebay-color: hsla(219, 89%, 30%, 1); // #083790
+$skype-color: hsla(198, 100%, 48%, 1); // #00acf4
+$instagram-color: hsla(208, 46%, 41%, 1); // #396d9a
+$dropbox-color: hsla(206, 89%, 46%, 1); // #0d84de
+$flickr-color: hsla(334, 100%, 46%, 1); // #ea0066
+$github-color: hsla(0, 0%, 18%, 1); // #2f2f2f
+$basecamp-color: hsla(121, 38%, 58%, 1); // #6bbd6d
+$tumblr-color: hsla(210, 37%, 30%, 1); // #304c68
+$foursquare-color: hsla(206, 72%, 45%, 1); // #207dc5
+$box-color: hsla(204, 83%, 40%, 1); // #1277bc
+$rss-color: #f26522;
+
+// ==========================================================================
+// TYPOGRAPHY
+// ==========================================================================
+
+// Font Stacks
+// ==========================================================================
+
+// Serif
+$georgia: Georgia,
+    Palatino,
+    "Palatino Linotype",
+    Times,
+    "Times New Roman",
+    serif;
+$georgia-heading: Georgia, Times, "Times New Roman", serif;
+$garamond: Garamond,
+    Baskerville,
+    "Baskerville Old Face",
+    "Hoefler Text",
+    "Times New Roman",
+    serif;
+$lucida-bright: "Lucida Bright", Georgia, serif;
+$palatino: Palatino,
+    "Palatino Linotype",
+    "Palatino LT STD",
+    "Book Antiqua",
+    Georgia,
+    serif;
+$big-caslon: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
+$didot: Didot,
+    "Didot LT STD",
+    "Hoefler Text",
+    Garamond,
+    "Times New Roman",
+    serif;
+$baskerville: Baskerville,
+    "Baskerville old face",
+    "Hoefler Text",
+    Garamond,
+    "Times New Roman",
+    serif;
+$hoefler-text: "Hoefler Text",
+    "Baskerville old face",
+    Garamond,
+    "Times New Roman",
+    serif;
+$bodoni-mt: "Bodoni MT",
+    Didot,
+    "Didot LT STD",
+    "Hoefler Text",
+    Garamond,
+    "Times New Roman",
+    serif;
+$goudy-old-style: "Goudy Old Style",
+    Garamond,
+    "Big Caslon",
+    "Times New Roman",
+    serif;
+$constantia: Constantia,
+    Palatino,
+    "Palatino Linotype",
+    "Palatino LT STD",
+    Georgia,
+    serif;
+$cambria: Cambria, Georgia, serif;
+$book-antiqua: "Book Antiqua",
+    Palatino,
+    "Palatino Linotype",
+    "Palatino LT STD",
+    Georgia,
+    serif;
+$times: Times, "Times New Roman", Georgia, serif;
+
+// Sans-Serif
+$arial: Arial, "Helvetica Neue", Helvetica, sans-serif;
+$optima: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+$futura: Futura, "Trebuchet MS", Arial, sans-serif;
+$gill-sans: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+$trebuchet: "Trebuchet MS",
+    "Lucida Grande",
+    "Lucida Sans Unicode",
+    "Lucida Sans",
+    Tahoma,
+    sans-serif;
+$helvetica: "Helvetica Neue", Arial, Helvetica, sans-serif;
+$verdana: Verdana, Geneva, sans-serif;
+$lucida-grande: "Lucida Grande",
+    "Lucida Sans Unicode",
+    "Lucida Sans",
+    Geneva,
+    Verdana,
+    sans-serif;
+$geneva: Geneva, Tahoma, Verdana, sans-serif;
+$segoe: Segoe, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+$candara: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+$calibri: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+$franklin-gothic: "Franklin Gothic Medium", Arial, sans-serif;
+$tahoma: Tahoma, Geneva, Verdana, sans-serif;
+
+// Monospace
+$monospace: "Andale Mono WT",
+    "Andale Mono",
+    "Lucida Console",
+    "Lucida Sans Typewriter",
+    "DejaVu Sans Mono",
+    "Bitstream Vera Sans Mono",
+    "Liberation Mono",
+    "Nimbus Mono L",
+    Monaco,
+    "Courier New",
+    Courier,
+    monospace;
+$monospace-simple: "andale mono", "lucida console", monospace;
+$consolas: Consolas,
+    "Andale Mono WT",
+    "Andale Mono",
+    "Lucida Console",
+    "Lucida Sans Typewriter",
+    "DejaVu Sans Mono",
+    "Bitstream Vera Sans Mono",
+    "Liberation Mono",
+    "Nimbus Mono L",
+    Monaco,
+    "Courier New",
+    Courier,
+    monospace;
+
+// Cursive
+$cursive: "Bradley Hand ITC", "Apple Chancery", "URW Chancery L", cursive;
+
+// Typographic Constants
+// ==========================================================================
+
+$base-font-size: 18px;
+$base-font-family: $arial; // or write your own custom font-stack
+$base-line-height: 1.4;
+$base-font-color: #444;
+$em-base: $base-font-size;
+$slick-font-family: $base-font-family;
+
+// Heading Levels
+// ==========================================================================
+
+$headings-typeset: (
+    alpha:
+        (
+            default: (font-size: 40px, line-height: 1.13),
+            medium: (font-size: 60px, line-height: 1.13),
+        ),
+    bravo:
+        (
+            default: (font-size: 45px, line-height: 1.11),
+            medium: (font-size: 42px, line-height: 1.14),
+        ),
+    charlie:
+        (
+            default: (font-size: 24px, line-height: 1.32),
+            medium: (font-size: 30px, line-height: 1.2)
+        ),
+    delta:
+        (
+            default: (font-size: 24px, line-height: 1.34),
+            medium: (font-size: 26px, line-height: 1.35)
+        ),
+    echo:
+        (
+            default: (font-size: 18px, line-height: 1.33),
+            medium: (font-size: 28px, line-height: 1.33)
+        )
+);
+
+$alt-body-type: (
+    tiny: (font-size: 12px, line-height: 1.16),
+    small: (font-size: 14px, line-height: 1.28),
+    medium: (font-size: 18px, line-height: 1.4),
+    large: (font-size: 23px, line-height: 1.25)
+);
+
+// Web Fonts
+// ==========================================================================
+
+// scss-lint:disable DuplicateProperty
+@mixin wf-primary {
+    // Graphik Light
+    font-family: $base-font-family;
+    font-weight: normal;
+    font-style: normal;
+
+    .wf-active-1 & {
+        font-family: GraphikLight, $base-font-family;
+        // -moz-osx-font-smoothing: grayscale;
+        // -webkit-font-smoothing: antialiased;
+        // font-smoothing: antialiased;
+    }
+}
+
+// scss-lint:disable DuplicateProperty
+@mixin wf-secondary {
+    // Graphik Semibold
+    font-family: $base-font-family;
+    font-weight: normal;
+    font-style: normal;
+
+    // This is here incase `wf-active-2` isnt around
+    // to fake the bold font weight
+    .wf-active-1 & {
+        font-family: GraphikSemibold, $base-font-family;
+        font-weight: normal; // Overriding fallback faux-bold
+    }
+
+    .wf-active-2 & {
+        font-family: GraphikSemibold, $base-font-family;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+        font-weight: bold;
+    }
+}
+
+
+
+
+
+// ==========================================================================
+// LAYOUT
+// ==========================================================================
+
+// Determines whether the site is fixed width. Defaults to "false" unless served is an oldie browser
+$is-fixed:						if($is-oldie, true, false);
+
+// Width of primary ".container" elements - determined by $is-fixed var
+$container-width:				if($is-fixed, 960px, 90%);
+
+
+// RESPONSIVE
+// https://github.com/sass-mq/sass-mq
+// ==========================================================================
+
+// Determines whether to fix media queries
+// https://github.com/sass-mq/sass-mq#responsive-mode-off
+$mq-responsive: if($is-oldie, false, true);
+
+
+// Name your breakpoints in a way that creates a ubiquitous language
+// across team members. It will improve communication between
+// stakeholders, designers, developers, and testers.
+$mq-breakpoints: (
+    tiny: 	320px,
+    small: 	600px,
+    medium: 768px,
+    large: 	992px,
+    xlarge: 1382px,
+    nav-break-1: 768px,
+	nav-break-2: 992px,
+);
+
+// Define the breakpoint from the $mq-breakpoints list that should
+// be used as the target width when outputting a static stylesheet
+// (i.e. when $mq-responsive is set to 'false').
+$mq-static-breakpoint: large;
+
+
+// # RIGHT TO LEFT
+// ==========================================================================
+
+// Overide this value to right
+$direction: left !default;
+
+// Standard directional values
+$padding-left:    padding-left;
+$padding-right:   padding-right;
+$margin-left:     margin-left;
+$margin-right:    margin-right;
+$border-right:    border-right;
+$left:            left;
+$right:           right;
+$top:             top;
+
+// RTL directional values
+// we flip and use interpolation to set value dynamically
+// eg: #{$padding-right}: 10px;
+@if $direction == right {
+    $padding-left:  padding-right;
+    $padding-right: padding-left;
+    $margin-left:   margin-right;
+    $margin-right:  margin-left;
+    $border-right:  border-left;
+    $left:          right;
+    $right:         left;
+}
+
+
+// # ANIMATIONS
+// ==========================================================================
+
+$default-transition:			ease-out;
+
+
+// SPACING
+// ==========================================================================
+
+$spacing-unit: 					40px;
+$half-spacing-unit: 			$spacing-unit/2;
+$quarter-spacing-unit: 			$spacing-unit/4;
+$double-spacing-unit: 			$spacing-unit*2;
+
+// This is used with _band.scss by default
+$spacing-map: (
+    default: $spacing-unit,
+    quarter: $quarter-spacing-unit,
+    half   : $half-spacing-unit,
+    double : $double-spacing-unit
+);
+
+
+
+// GRID
+// ==========================================================================
+
+// Include a set of standard grid breakpoints?
+$use-standard-breakpoints: 		true;
+
+// Grid configuration
+$grids: 						2 3 4 5;	// number of columns required
+
+// Gutters
+$gutter: 						3em;	 // gutter between each column in em's
+$double-gutter-width: 			($gutter*2);
+$half-gutter-width: 			($gutter/2);
+$quarter-gutter-width: 			($gutter/4);
+
+
+// # RADIUS
+// ==========================================================================
+
+$base-border-radius:			5px;
+
+
+// # FORMS
+// ==========================================================================
+$form-box-shadow:				0;
+$form-box-shadow-focus: 		0;
+
+
+// # ICONS
+// ==========================================================================
+
+$tcon-menu-color:				$base-grey;
+
+
+// STACKING
+// bird's eye view of components dependent on the z-axis
+// ==========================================================================
+
+$zindex-tier-1:        			1000;
+$zindex-tier-2:         		2000;
+$zindex-tier-3:         		3000;
+$zindex-tier-4:     			4000;
+$zindex-tier-5:   				5000;
+$zindex-tier-6:           		6000;
+$zindex-tier-7:           		7000;
+$zindex-tier-8:           		8000;
+$zindex-tier-9:           		9000;
+
+
+// # ALERTS
+// ==========================================================================
+
+
+$warning-text:                   #c09853 !default;
+$warning-background:             #fcf8e3 !default;
+$warning-border:                 darken(adjust-hue($warning-background, -10), 3%) !default;
+
+$error-text:                     #b94a48 !default;
+$error-background:               #f2dede !default;
+$error-border:                   darken(adjust-hue($error-background, -10), 3%) !default;
+
+$success-text:                   #468847 !default;
+$success-background:             #dff0d8 !default;
+$success-border:                 darken(adjust-hue($success-background, -10), 5%) !default;
+
+$info-text:                      #3a87ad !default;
+$info-background:                #d9edf7 !default;
+$info-border:                    darken(adjust-hue($info-background, -10), 7%) !default;

@@ -1,0 +1,39 @@
+// ==========================================================================
+//
+// BILLBOARD
+//
+// Description: A fullscreen section that has a background image
+//
+// ==========================================================================
+
+// ==========================================================================
+// # MIXIN
+// ==========================================================================
+
+// The mixin has been put in `_mixins.scss` so it can be used by other files.
+// It takes 3 arguments;
+//     - $height   - Height of the billboard
+//     - $position - Background-position of the image
+//     - $bgc      - Fallback background-color
+
+// @mixin billboard($height: 56.25vw, $position: 50% 0%, $bgc: primary) {}
+
+
+
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.billboard { @include billboard; }
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: HEIGHT
+// ==========================================================================
+
+.billboard--fh { @include billboard(0 50%, 100vh); }

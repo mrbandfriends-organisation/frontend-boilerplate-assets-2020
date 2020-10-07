@@ -1,0 +1,11 @@
+{
+	"presets": [
+		["@babel/preset-env", {
+			"useBuiltIns": "usage" // scan files for required polyfills and create package
+		}]
+	],
+	plugins: [
+        'transform-object-assign',
+        'syntax-dynamic-import'
+    ]
+}

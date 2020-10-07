@@ -1,0 +1,142 @@
+@charset "UTF-8"; // must be the first item in the file
+// ==========================================================================
+//
+// MAIN FILE
+//
+// Description: main entry point for the site styles. Organised on ITCSS
+// principles with each layer representing a greater level of specificity
+// than the last.
+//
+// Follows guidelines laid out in http://sass-guidelin.es/#main-file
+//
+// ==========================================================================
+
+$is-oldie: false !default;
+
+// # SETTINGS
+// ==========================================================================
+@import "settings/config";
+
+
+// # PACKAGES
+// ==========================================================================
+@import "node_modules/sass-mq/mq";
+@import "node_modules/sass-to-js/sass/sass-to-js";
+
+
+
+// # UTILS - http://sass-guidelin.es/#utils-folder
+// ==========================================================================
+@import "utils/functions";
+@import "utils/mixins";
+@import "utils/offcanvas";
+@import "utils/nav-menu";
+
+
+// # BASE - http://sass-guidelin.es/#base-folder
+// ==========================================================================
+@import "base/normalize";
+@import "base/base";
+@import "base/typography";
+
+
+// # LAYOUT - http://sass-guidelin.es/#layout-folder
+// ==========================================================================
+@import "layout/grid";
+@import "layout/forms";
+
+
+// # ELEMENTS
+// ==========================================================================
+@import "elements/headings";
+@import "elements/tables";
+
+
+// # OBJECTS
+// ==========================================================================
+@import "objects/alerts";
+@import "objects/svg-icons";
+@import "objects/offcanvas-toggle";
+// @import "objects/island";
+// @import "objects/landmark";
+@import "objects/containers";
+@import "objects/band";
+// @import "objects/plain-link";
+// @import "objects/slanted";
+@import "objects/bullet-list";
+@import "objects/inline-list";
+// @import "objects/definition-list";
+// @import "objects/overlayed-media";
+@import "objects/section-full-height";
+// @import "objects/stat";
+@import "objects/play-pause";
+
+
+
+// # MRB - Base styles for custom Mr B JS components
+// ==========================================================================
+@import "mrb/mrb-accordion";
+@import "mrb/mrb-toggler";
+
+
+// # COMPONENTS - http://sass-guidelin.es/#components-folder
+// ==========================================================================
+@import "components/buttons";
+@import "components/primary-offcanvas";
+@import "components/transformicons";
+@import "components/skip-link";
+@import "components/map";
+// @import "components/carousel";
+// @import "components/pagination";
+// @import "components/article-bookmark";
+@import "components/split-feature";
+@import "components/billboard";
+@import "components/page-hero";
+// @import "components/video-feature";
+@import "components/split-leader";
+@import "components/text-module";
+@import "components/background-video";
+@import "components/background-image";
+
+// # SITE LAYOUT STRUCTURE
+// ==========================================================================
+@import "layout/banner";
+@import "layout/primary-menu";
+@import "layout/footer";
+@import "layout/social-menu";
+// @import "layout/gravity-forms";
+
+
+// # SITE PAGES
+// ==========================================================================
+@import "pages/home";
+
+
+
+// # VENDORS
+// # CSS files from external libraries and frameworks
+// ==========================================================================
+// @import "vendors/EXAMPLE";
+// @import "vendors/slick";
+// @import "vendors/slick-theme";
+// @import "node_modules/plyr/src/scss/plyr";
+
+
+// # VENDORS EXTENSIONS
+// # contains any overides to vendor extensions (see above)
+// ==========================================================================
+//@import "vendors-extensions/EXAMPLE";
+// @import "vendors-extensions/slick";
+// @import "vendors-extensions/plyr";
+
+
+
+// # SHAME FILE
+// # http://sass-guidelin.es/#shame-file
+// ==========================================================================
+@import "shame";
+
+
+// # TRUMPS/HELPERS
+// ==========================================================================
+@import "utils/helpers";

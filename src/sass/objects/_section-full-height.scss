@@ -1,0 +1,51 @@
+// ==========================================================================
+//
+// SECTION FULL HEIGHT
+//
+// Description: A components that min-height: 100vh
+//
+// ==========================================================================
+
+// ==========================================================================
+// # MIXIN
+// ==========================================================================
+
+@mixin section-fh($mobile-size: 0) {
+    min-height: $mobile-size;
+
+    @include mq(medium) { min-height: 100vh; }
+}
+
+
+@mixin section-fh-medium {
+    @include mq(medium) { min-height: 100vh; }
+}
+
+@mixin section-fh-image {
+    height: 56.25vw; // don't allow it to get bigger than the aspect ratio
+    max-height: 100vh;
+}
+
+
+
+
+
+// ==========================================================================
+// # BASE
+// ==========================================================================
+
+.section-fh { @include section-fh; }
+
+
+.section-fh--medium { @include section-fh-medium; }
+
+
+.section-fh--image { @include section-fh-image; }
+
+
+
+
+
+// ==========================================================================
+// # MODIFIER: %%MODIFIER_NAME%%
+// ==========================================================================
